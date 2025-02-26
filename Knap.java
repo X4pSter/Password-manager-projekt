@@ -6,7 +6,7 @@ public class Knap{
     private int rectColor, rectHighlight;
     private String action;
     
-    public knap(PApplet p, int xin, int yin, int bin, int hin, String titelin, String actionin){
+    public Knap(PApplet p, int xin, int yin, int bin, int hin, String titelin, String actionin){
       this.p = p;
       x = xin; 
       y = yin; 
@@ -20,26 +20,26 @@ public class Knap{
 
     public void display(){
         if(p.mouseX < x + b && p.mouseX > x && p.mouseY < y + h && p.mouseY > y){
-         fill(rectHighlight);
+         p.fill(rectHighlight);
         } 
         else {
-          fill(rectColor);
+          p.fill(rectColor);
         }
-        noStroke();
-        rect(x,y,b,h,25);
+        p.noStroke();
+        p.rect(x,y,b,h,25);
 
-        textAlign(p.LEFT);
-        fill(50);
-        textSize(15);
-        float w = textWidth(titel);
-        text(titel,x + b/2 - w/2,y + h/2 + 5);
+        p.textAlign(p.LEFT);
+        p.fill(50);
+        p.textSize(15);
+        float w = p.textWidth(titel);
+        p.text(titel,x + b/2 - w/2,y + h/2 + 5);
         
     
       }
       
       private void mouseClickDetection(){
        if(p.mouseX < x + b && p.mouseX > x && p.mouseY < y + h && p.mouseY > y){
-         method(action);
+         p.method(action);
        }
       }
     
