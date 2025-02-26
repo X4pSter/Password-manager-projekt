@@ -1,11 +1,9 @@
 import processing.core.*;
-public class knap{
-
+public class Knap{
     private PApplet p;
-
     private int x, y,b,h;
     private String titel;
-    private p.color rectColor, rectHighlight;
+    private int rectColor, rectHighlight;
     private String action;
     
     public knap(PApplet p, int xin, int yin, int bin, int hin, String titelin, String actionin){
@@ -16,9 +14,8 @@ public class knap{
       h = hin;
       titel = titelin; 
       action = actionin;
-      
-      rectColor = p.color(200);
-      rectHighlight = p.color(100); 
+      rectColor = 200;
+      rectHighlight = 100; 
     }
 
     public void display(){
