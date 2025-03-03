@@ -52,6 +52,9 @@ public class TekstFelt {
         p.rectMode(p.CORNER);
 
         p.fill(255);
+        
+        p.strokeWeight(2);
+        p.stroke(0);
 
         p.rect(p.width/2-150,150,w,50,5);
 
@@ -61,9 +64,7 @@ public class TekstFelt {
 
         p.text(tekst,p.width/2-145,173);
 
-        p.strokeWeight(2);
-
-        p.stroke(0);
+        
         
     }
 
