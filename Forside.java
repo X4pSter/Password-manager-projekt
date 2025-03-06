@@ -1,16 +1,27 @@
 import processing.core.*;
-import java.util.ArrayList;
 
 public class Forside{
 
     private PApplet p;
 
-    private ArrayList<Knap> knap1 = new ArrayList<Knap>();
+    private Knap LogIn;
     private TekstFelt tekstFelt1;
     
-    public Forside(PApplet p, Knap k1, TekstFelt t1){
+    public Forside(PApplet p, Knap li, TekstFelt t1){
         this.p = p;
-        knap1.add(k1);
+        LogIn = li;
         tekstFelt1 = t1;
+    }
+
+    public void runDisplay(){
+        tekstFelt1.runDisplay();
+        LogIn.runDisplay();
+    }
+
+    public void runKeys(){
+        tekstFelt1.runKeys();
+    }
+    public void runMouse(){
+        LogIn.mouseClickDetection();
     }
 }

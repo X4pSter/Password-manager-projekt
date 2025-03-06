@@ -1,13 +1,16 @@
 TekstFelt test;
 Knap knap;
+Forside forside;
 RandomString test2;
 String testString;
 
 void setup(){
     size(800,800);
-
+    
     test = new TekstFelt(this,200,200,300,50);
     knap = new Knap(this, width/2, 650,100,50,"Knap","TestKnap");
+
+    forside = new Forside(this, knap, test);
 
     test2 = new RandomString();
 
@@ -18,20 +21,19 @@ void setup(){
 
 void draw(){
     background(200);
-    test.runDisplay();
-    knap.runDisplay();
+    forside.runDisplay();
 }
 
 void keyPressed(){
-    test.runKeys();
+    forside.runKeys();
 }
 
 void mousePressed(){
-    knap.mouseClickDetection();
+    forside.runMouse();
 
 }
 
 void TestKnap(){
-    println("test");
+    println("test forside");
 }
 
