@@ -12,8 +12,14 @@ public class RandomString {
 
     SecureRandom secureRandom = new SecureRandom();
 
+    private void genSeed(){
+
+    }
+
     public String genRandString(int l){
         String randString = "";
+
+        println(randomBytes);
 
         randomBytes = new byte[l];
 
