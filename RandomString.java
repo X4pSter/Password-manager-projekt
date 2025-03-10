@@ -19,7 +19,7 @@ public class RandomString {
     public String genRandString(int l){
         String randString = "";
 
-        println(randomBytes);
+        System.out.println(randomBytes);
 
         randomBytes = new byte[l];
 

@@ -3,7 +3,6 @@ public class Knap{
     private PApplet p;
     private int x, y,b,h;
     private String titel;
-    private int rectColor, rectHighlight;
     private String action;
 
     public Knap(PApplet p, int xin, int yin, int bin, int hin, String titelin, String actionin){
@@ -14,22 +13,20 @@ public class Knap{
       h = hin;
       titel = titelin; 
       action = actionin;
-      rectColor = 250;
-      rectHighlight = 100; 
     }
 
     private void display(){
         if(p.mouseX < x + b/2 && p.mouseX > x-b/2 && p.mouseY < y + h && p.mouseY > y){
-         p.fill(rectHighlight);
+         p.fill(128,183,245);
         } 
         else {
-          p.fill(rectColor);
+          p.fill(3,102,214);
         }
         p.noStroke();
         p.rect(x-b/2,y,b,h,25);
 
         p.textAlign(p.LEFT);
-        p.fill(50);
+        p.fill(255);
         p.textSize(15);
         float w = p.textWidth(titel);
         p.text(titel,x-b/2 + b/2 - w/2,y + h/2 + 5);

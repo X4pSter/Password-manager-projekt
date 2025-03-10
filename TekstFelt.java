@@ -10,7 +10,9 @@ public class TekstFelt {
 
     private float x,y;
 
-    public TekstFelt(PApplet p, float x, float y, float w, float h){
+    private String titel = "";
+
+    public TekstFelt(PApplet p, float x, float y, float w, float h, String titel){
         this.p = p;
 
         this.x = x;
@@ -22,6 +24,8 @@ public class TekstFelt {
         sw = w;
 
         this.h = h;
+
+        this.titel = titel;
     }
 
     private void handleCharacter(){
@@ -46,23 +50,30 @@ public class TekstFelt {
           
         if(w < sw){
            w = sw;
+
         }
-        p.textSize(40);
 
         p.rectMode(p.CORNER);
 
-        p.fill(255);
+        p.fill(29,33,37);
         
-        p.strokeWeight(2);
-        p.stroke(0);
+        p.strokeWeight(1);
+        p.stroke(3,102,214);
 
-        p.rect(p.width/2-150,150,w,50,5);
+        p.rect(p.width/2-150,y,w,50,5);
 
-        p.fill(0);
+        p.fill(255);
 
         p.textAlign(p.LEFT,p.CENTER);
 
-        p.text(tekst,p.width/2-145,173);
+        p.text(tekst,p.width/2-145,y+25);
+
+        p.textSize(15);
+        p.fill(150);
+        p.textAlign(p.LEFT);
+        p.text(titel,p.width/2-150,y-15);
+
+
 
         
         
@@ -78,6 +89,7 @@ public class TekstFelt {
     
     public void runDisplay(){
         display();
+        p.textSize(25);
     }
 
     public void runKeys(){

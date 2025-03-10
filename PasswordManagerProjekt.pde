@@ -1,5 +1,5 @@
-TekstFelt test;
-Knap knap;
+TekstFelt kode;
+Knap LogInd;
 Forside forside;
 RandomString test2;
 String testString;
@@ -7,10 +7,10 @@ String testString;
 void setup(){
     size(800,800);
     
-    test = new TekstFelt(this,200,200,300,50);
-    knap = new Knap(this, width/2, 650,100,50,"Knap","TestKnap");
+    kode = new TekstFelt(this,300,350,300,50,"Kodeord");
+    LogInd = new Knap(this, width/2, 420,300,50,"Log Ind","TestKnap");
 
-    forside = new Forside(this, knap, test);
+    forside = new Forside(this, LogInd, kode);
 
     test2 = new RandomString();
 
@@ -20,8 +20,9 @@ void setup(){
 }
 
 void draw(){
-    background(200);
+    background(#24292e);
     forside.runDisplay();
+    textSize(25);
 }
 
 void keyPressed(){

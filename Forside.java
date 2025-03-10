@@ -6,6 +6,7 @@ public class Forside{
 
     private Knap LogIn;
     private TekstFelt tekstFelt1;
+    private String li = "Log Ind";
     
     public Forside(PApplet p, Knap li, TekstFelt t1){
         this.p = p;
@@ -16,6 +17,12 @@ public class Forside{
     public void runDisplay(){
         tekstFelt1.runDisplay();
         LogIn.runDisplay();
+        
+        p.textSize(50);
+        p.fill(255);
+        p.textAlign(p.CENTER);
+        p.text(li,p.width/2,270);
+
     }
 
     public void runKeys(){
