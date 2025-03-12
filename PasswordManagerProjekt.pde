@@ -1,28 +1,35 @@
 TekstFelt kode;
-Knap LogInd;
+Knap LogInd, reset;
 Forside forside;
 RandomString test2;
 String testString;
+int hr = 128, hg = 183, hb = 245;
+int cr = 3, cg = 102, cb = 214;
+Boolean TrykReset = false;
 
 void setup(){
     size(800,800);
     
     kode = new TekstFelt(this,300,350,300,50,"Kodeord");
-    LogInd = new Knap(this, width/2, 420,300,50,"Log Ind","TestKnap");
+    LogInd = new Knap(this, width/2, 420,300,50,"Log Ind","TestKnap",hr,hg,hb,cr,cg,cb);
+    reset = new Knap(this, 720, 30,100,50,"Fjern alt data","ResetData",235,3,3,0,0,0);
 
-    forside = new Forside(this, LogInd, kode);
+    forside = new Forside(this, LogInd, reset, kode);
 
     test2 = new RandomString();
 
     testString = test2.genRandString(20);
 
     println(testString);
+
+
 }
 
 void draw(){
     background(#24292e);
     forside.runDisplay();
     textSize(25);
+
 }
 
 void keyPressed(){
@@ -37,4 +44,11 @@ void mousePressed(){
 void TestKnap(){
     println("test forside");
 }
+
+void ResetData(){
+    println("test reset");
+    TrykReset = true;
+    println(TrykReset);
+}
+
 

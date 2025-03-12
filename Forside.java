@@ -4,19 +4,21 @@ public class Forside{
 
     private PApplet p;
 
-    private Knap LogIn;
+    private Knap LogIn, reset;
     private TekstFelt tekstFelt1;
     private String li = "Log Ind";
     
-    public Forside(PApplet p, Knap li, TekstFelt t1){
+    public Forside(PApplet p, Knap li, Knap re,TekstFelt t1){
         this.p = p;
         LogIn = li;
+        reset = re;
         tekstFelt1 = t1;
     }
 
     public void runDisplay(){
         tekstFelt1.runDisplay();
         LogIn.runDisplay();
+        reset.runDisplay();
         
         p.textSize(50);
         p.fill(255);
@@ -30,5 +32,6 @@ public class Forside{
     }
     public void runMouse(){
         LogIn.mouseClickDetection();
+        reset.mouseClickDetection();
     }
 }

@@ -4,8 +4,10 @@ public class Knap{
     private int x, y,b,h;
     private String titel;
     private String action;
+    private int hr,hg,hb;
+    private int cr, cg, cb;
 
-    public Knap(PApplet p, int xin, int yin, int bin, int hin, String titelin, String actionin){
+    public Knap(PApplet p, int xin, int yin, int bin, int hin, String titelin, String actionin, int hrin, int hgin, int hbin, int crin, int cgin, int cbin){
       this.p = p;
       x = xin; 
       y = yin; 
@@ -13,14 +15,23 @@ public class Knap{
       h = hin;
       titel = titelin; 
       action = actionin;
+      hr = hrin;
+      hg = hgin;
+      hb = hbin;
+      cr = crin;
+      cg = cgin;
+      cb = cbin;
+      
+      
+
     }
 
     private void display(){
         if(p.mouseX < x + b/2 && p.mouseX > x-b/2 && p.mouseY < y + h && p.mouseY > y){
-         p.fill(128,183,245);
+         p.fill(hr,hg,hb);
         } 
         else {
-          p.fill(3,102,214);
+          p.fill(cr,cg,cb);
         }
         p.noStroke();
         p.rect(x-b/2,y,b,h,25);
