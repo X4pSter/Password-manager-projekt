@@ -21,7 +21,7 @@ public class AllCharacters {
         }
         
         // Add commonly allowed special characters
-        String specialChars = "!@#$%^&*()-_+=";
+        String specialChars = "!@";
         for (char c : specialChars.toCharArray()) {
             characters.add(String.valueOf(c));
         }

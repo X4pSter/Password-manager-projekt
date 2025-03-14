@@ -1,3 +1,5 @@
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
 public class RandomString {
@@ -12,20 +14,25 @@ public class RandomString {
 
     SecureRandom secureRandom = new SecureRandom();
 
-    private void genSeed(){
+    private void genSeed(int l){
+        randomBytes = new byte[l];
 
+        secureRandom.nextBytes(randomBytes);
+
+        for(int i = 0; i < randomBytes.length; i++){
+            randomBytes[i] = (byte)Math.abs(randomBytes[i]);
+        }
     }
 
     public String genRandString(int l){
+        /*
         String randString = "";
-
-        System.out.println(randomBytes);
-
-        randomBytes = new byte[l];
 
         randomNumbers = new int[l];
 
-        secureRandom.nextBytes(randomBytes);
+        if(randomBytes == null){
+            genSeed(l);
+        }
 
         for(int i = 0; i < randomNumbers.length; i++){
             randomNumbers[i] = Math.abs(randomBytes[i]);
@@ -36,6 +43,15 @@ public class RandomString {
             randString += allCharactersArray[temp%allCharactersArray.length];
         }
 
+        return(randString);
+        */
+        String randString = "";
+
+        if(randomBytes == null){
+            genSeed(l);
+        }
+
+        randString = new String(randomBytes,StandardCharsets.UTF_8);
         return(randString);
     }
 

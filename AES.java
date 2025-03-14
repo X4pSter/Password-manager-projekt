@@ -27,13 +27,11 @@ class AES {
                 = new IvParameterSpec(iv); 
   
             // Create SecretKeyFactory object 
-            SecretKeyFactory factory 
-                = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256"); 
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256"); 
             
             // Create KeySpec object and assign with 
             // constructor 
-            KeySpec spec = new PBEKeySpec( 
-                SECRET_KEY.toCharArray(), SALT.getBytes(), 65536, 256); 
+            KeySpec spec = new PBEKeySpec(SECRET_KEY.toCharArray(), SALT.getBytes(), 65536, 256); 
                 
             SecretKey tmp = factory.generateSecret(spec); 
             SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES"); 
@@ -64,13 +62,11 @@ class AES {
                 = new IvParameterSpec(iv); 
   
             // Create SecretKeyFactory Object 
-            SecretKeyFactory factory 
-                = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256"); 
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256"); 
   
             // Create KeySpec object and assign with 
             // constructor 
-            KeySpec spec = new PBEKeySpec( 
-                SECRET_KEY.toCharArray(), SALT.getBytes(), 65536, 256); 
+            KeySpec spec = new PBEKeySpec(SECRET_KEY.toCharArray(), SALT.getBytes(), 65536, 256); 
 
             SecretKey tmp = factory.generateSecret(spec); 
             SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES"); 
@@ -79,8 +75,7 @@ class AES {
             cipher.init(Cipher.DECRYPT_MODE, secretKey, ivspec); 
 
             // Return decrypted string 
-            return new String(cipher.doFinal( 
-                Base64.getDecoder().decode(strToDecrypt))); 
+            return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt))); 
         } 
         catch (Exception e) { 
             System.out.println("Error while decrypting: "+ e.toString()); 
