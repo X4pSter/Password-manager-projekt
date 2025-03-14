@@ -1,5 +1,6 @@
 TekstFelt kode;
 Knap LogInd, reset;
+Knap WipeYes, WipeNo;
 Forside forside;
 RandomString test2;
 String testString;
@@ -16,8 +17,11 @@ void setup(){
     kode = new TekstFelt(this,300,350,300,50,"Kodeord");
     LogInd = new Knap(this, width/2, 420,300,50,"Log Ind","TestKnap",hr,hg,hb,cr,cg,cb);
     reset = new Knap(this, 720, 30,100,50,"Fjern alt data","ResetData",235,3,3,0,0,0);
+    WipeYes = new Knap(this, width/2+100, height/2+100,100,50,"Ja","WipeDatabase",235,3,3,cr,cg,cb);
+    WipeNo = new Knap(this, width/2-100, height/2+100,100,50,"Nej","KeepData",7, 250, 2,cr,cg,cb);
 
-    forside = new Forside(this, LogInd, reset, kode);
+
+    forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo);
 
     test2 = new RandomString();
 
@@ -39,6 +43,11 @@ void draw(){
     forside.runDisplay();
     textSize(25);
 
+    if(TrykReset == true){
+        forside.DataWipe();
+
+    }
+
 }
 
 void keyPressed(){
@@ -58,6 +67,13 @@ void ResetData(){
     println("test reset");
     TrykReset = true;
     println(TrykReset);
+
 }
 
+void WipeDatabase(){
 
+}
+
+void KeepData(){
+    TrykReset = false;
+}
