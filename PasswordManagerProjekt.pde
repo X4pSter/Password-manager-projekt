@@ -6,6 +6,9 @@ String testString;
 int hr = 128, hg = 183, hb = 245;
 int cr = 3, cg = 102, cb = 214;
 Boolean TrykReset = false;
+RandomString test3 = new RandomString();
+AES test = new AES("very very secret key", test3.genRandString(20));
+
 
 void setup(){
     size(800,800);
@@ -22,7 +25,13 @@ void setup(){
 
     println(testString);
 
+    String temp = test.encrypt(testString);
 
+    String temp2 = test.decrypt(temp);
+
+    println(temp2);
+
+    println(temp2.length());
 }
 
 void draw(){

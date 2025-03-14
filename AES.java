@@ -10,21 +10,24 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec; 
 import javax.crypto.spec.SecretKeySpec; 
   
-class AES { 
-    // Class private variables 
-    private static final String SECRET_KEY = "my_super_secret_key_ho_ho_ho"; 
+class AES{ 
+
+    private final String SECRET_KEY;
+    private final String SALT;
+
+    public AES(String sk, String s){
+        SECRET_KEY = sk;
+        SALT = s;
+    }
     
-    private static final String SALT = "ssshhhhhhhhhhh!!!!"; 
-  
     // This method use to encrypt to string 
-    public static String encrypt(String strToEncrypt) 
-    { 
+    public String encrypt(String strToEncrypt) { 
+
         try { 
   
             // Create default byte array 
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; 
-            IvParameterSpec ivspec 
-                = new IvParameterSpec(iv); 
+            IvParameterSpec ivspec = new IvParameterSpec(iv); 
   
             // Create SecretKeyFactory object 
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256"); 
@@ -49,8 +52,8 @@ class AES {
     } 
   
     // This method use to decrypt to string 
-    public static String decrypt(String strToDecrypt) 
-    { 
+    public String decrypt(String strToDecrypt) { 
+
         try { 
   
             // Default byte array 
