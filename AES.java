@@ -11,19 +11,14 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec; 
   
 class AES{ 
-
-    private final String SECRET_KEY;
-    private final String SALT;
-
-    public AES(String sk, String s){
-        SECRET_KEY = sk;
-        SALT = s;
-    }
     
     // This method use to encrypt to string 
-    public String encrypt(String strToEncrypt) { 
+    public String encrypt(String strToEncrypt, String sk, String s) { 
 
         try { 
+
+            String SECRET_KEY = sk;
+            String SALT = s;
   
             // Create default byte array 
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; 
@@ -52,10 +47,13 @@ class AES{
     } 
   
     // This method use to decrypt to string 
-    public String decrypt(String strToDecrypt) { 
+    public String decrypt(String strToDecrypt, String sk, String s) { 
 
         try { 
-  
+            
+            String SECRET_KEY = sk;
+            String SALT = s;
+
             // Default byte array 
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; 
 

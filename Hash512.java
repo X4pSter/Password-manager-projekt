@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 // Driver Class
-public class Hash {
+public class Hash512 {
       // Main Function
     public static String encryptThisString(String input)
     {
