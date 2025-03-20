@@ -95,4 +95,8 @@ public class TekstFelt {
     public void runKeys(){
         handleCharacter();
     }
+
+    public void resetTekst(){
+        tekst = "";
+    }
 }
