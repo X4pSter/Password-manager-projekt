@@ -1,3 +1,5 @@
+import java.io.File;
+
 TekstFelt kode;
 Knap LogInd, reset;
 Knap WipeYes, WipeNo;
@@ -7,11 +9,10 @@ String testString;
 int hr = 128, hg = 183, hb = 245;
 int cr = 3, cg = 102, cb = 214;
 Boolean TrykReset = false;
-RandomString test3 = new RandomString();
+RandomString rand = new RandomString();
 AES test = new AES();
 String password;
-JSONArray db = new JSONArray();
-JSONObject pw = new JSONObject();
+JSONObject db,pw,s;
 RandomString saltGen = new RandomString();
 String salt;
 AES aes;
@@ -19,6 +20,7 @@ Hash512 hash = new Hash512();
 Hash256 hash256 = new Hash256();
 boolean passwordMatch = false;
 String hashedTemp;
+File dbCheck = new File("db.json");
 
 void setup(){
     size(800,800);
@@ -34,25 +36,17 @@ void setup(){
 
     forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo);
 
-    String temp3 = "oog" + salt;
+    if(dbCheck.exists()){
+        println("exists");
 
-    hashedTemp = hash.encryptThisString(temp3);
+        db = loadJSONObject("db.json");
+    } else{
+        db = new JSONObject();
 
-    println(hashedTemp);
+        db.setString("salt",rand.genRandString(20));
 
-    String hashedSalt = hash.encryptThisString(salt);
-
-    println(hashedSalt);
-
-    aes = new AES();
-
-    String encryptedTemp = aes.encrypt(hashedTemp,hashedTemp,salt);
-
-    println(encryptedTemp);
-
-    pw.setString("password",encryptedTemp);
-
-    db.setJSONObject(0,pw);
+        saveJSONObject(db,"db.json");
+    }
 }
 
 void draw(){
@@ -88,10 +82,10 @@ void getPassword(){
     JSONObject tempJO = tempJA.getJSONObject(0);
 
     String temp = tempJO.getString("password");
-    String decryptyPassword = aes.encrypt(hashyPassword,hashyPassword,salt);
-    println(decryptyPassword);
+    String encryptyPassword = aes.encrypt(hashyPassword,hashyPassword,salt);
+    println(encryptyPassword);
 
-    passwordMatch = temp.equals(decryptyPassword);
+    passwordMatch = temp.equals(encryptyPassword);
     println(passwordMatch);
 }
 
