@@ -1,9 +1,10 @@
 import java.io.File;
 
 TekstFelt kode;
-Knap LogInd, reset;
+Knap LogInd, reset,tilføj,LogAf;
 Knap WipeYes, WipeNo;
 Forside forside;
+Homescreen homescreen;
 RandomString test2;
 String testString;
 int hr = 128, hg = 183, hb = 245;
@@ -21,6 +22,7 @@ Hash256 hash256 = new Hash256();
 boolean passwordMatch = false;
 String hashedTemp;
 File dbCheck = new File("db.json");
+int Side = 0;
 
 void setup(){
     size(800,800);
@@ -31,10 +33,14 @@ void setup(){
     LogInd = new Knap(this, width/2, 420,300,50,"Log Ind","getPassword",hr,hg,hb,cr,cg,cb);
     reset = new Knap(this, 720, 30,100,50,"Fjern alt data","ResetData",235,3,3,0,0,0);
     WipeYes = new Knap(this, width/2+100, height/2+100,100,50,"Ja","WipeDatabase",235,3,3,cr,cg,cb);
-    WipeNo = new Knap(this, width/2-100, height/2+100,100,50,"Nej","KeepData",7, 250, 2,cr,cg,cb);
-
+    WipeNo = new Knap(this, width/2-100, height/2+100,100,50,"Nej","Tilbage",7, 250, 2,cr,cg,cb);
 
     forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo);
+
+    tilføj = new Knap(this, width/2, 350,300,50,"Tilføj Password","NyData",hr,hg,hb,cr,cg,cb);
+    LogAf = new Knap(this, 80, 30,100,50,"Log Af","Tilbage",hr,hg,hb,cr,cg,cb);
+
+    homescreen = new Homescreen(this,tilføj, LogAf);
 
     if(dbCheck.exists()){
         println("exists");
@@ -51,8 +57,15 @@ void setup(){
 
 void draw(){
     background(#24292e);
-    forside.runDisplay();
-    textSize(25);
+
+    if(Side==0){
+        forside.runDisplay();
+        textSize(25);
+    }
+
+    if(Side == 1 && passwordMatch==true){
+        homescreen.runDisplay();
+    }else{Side=0;}
 
     if(TrykReset == true){
         forside.DataWipe();
@@ -62,15 +75,18 @@ void draw(){
 }
 
 void keyPressed(){
-    forside.runKeys();
+    if(Side==0){forside.runKeys();}
 }
 
 void mousePressed(){
-    forside.runMouse();
+    if(Side==0){forside.runMouse();}
+    if(Side==1){homescreen.runMouse();}
 
 }
 
 void getPassword(){
+    
+    
     println("test forside");
     password = kode.getTekst();
     println(password);
@@ -87,19 +103,25 @@ void getPassword(){
 
     passwordMatch = temp.equals(encryptyPassword);
     println(passwordMatch);
+    
+    // Side = 1;
+ 
+
 }
 
 void ResetData(){
     println("test reset");
     TrykReset = true;
-    println(TrykReset);
+    println("TrykReset = " + TrykReset);
 
 }
 
 void WipeDatabase(){
-
+    
 }
 
-void KeepData(){
+void Tilbage(){
     TrykReset = false;
+    if(Side <= 1){Side --;}else{Side = 0;}
+    kode.resetTekst();
 }
