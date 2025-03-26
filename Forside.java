@@ -7,7 +7,7 @@ public class Forside{
     private Knap LogIn, reset;
     private Knap WipeYes, WipeNo;
     private TekstFelt tekstFelt1;
-    private String li = "Log Ind";
+    private String LI = "Log Ind";
     
     public Forside(PApplet p, Knap li, Knap re,TekstFelt t1,Knap WY, Knap WN){
         this.p = p;
@@ -26,7 +26,7 @@ public class Forside{
         p.textSize(50);
         p.fill(255);
         p.textAlign(p.CENTER);
-        p.text(li,p.width/2,270);
+        p.text(LI,p.width/2,270);
 
     }
 
@@ -39,6 +39,9 @@ public class Forside{
 
         WipeYes.mouseClickDetection();
         WipeNo.mouseClickDetection();
+
+        tekstFelt1.mouseClickDetection();
+    
         
     }
 

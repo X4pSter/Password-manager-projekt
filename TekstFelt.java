@@ -12,6 +12,10 @@ public class TekstFelt {
 
     private String titel = "";
 
+    private boolean Click = false;
+
+    private int R=100, G=100, B=100;
+
     public TekstFelt(PApplet p, float x, float y, float w, float h, String titel){
         this.p = p;
 
@@ -28,7 +32,27 @@ public class TekstFelt {
         this.titel = titel;
     }
 
+    public void mouseClickDetection(){
+        if(p.mouseX < x + w/2 && p.mouseX > x-w/2 && p.mouseY < y + h && p.mouseY > y){
+            Click = true;
+            R=3;
+            G=102;
+            B=214;
+            
+        }else{
+            Click=false;
+            R=100;
+            G=100;
+            B=100;
+        }
+    }
+
+
+
     private void handleCharacter(){
+        
+        if(Click==true){
+            
         if(p.key != p.CODED && p.keyCode != p.ENTER && p.keyCode != p.RETURN){
             tekst += p.str(p.key);
         }
@@ -40,8 +64,9 @@ public class TekstFelt {
                 tekst = "";
                 p.println(tekst);
             }
-            
         }
+            
+    }
 
     }
 
@@ -58,15 +83,15 @@ public class TekstFelt {
         p.fill(29,33,37);
         
         p.strokeWeight(1);
-        p.stroke(3,102,214);
+        p.stroke(R,G,B);
 
-        p.rect(p.width/2-150,y,w,50,5);
+        p.rect(x-w/2,y,w,50,5);
 
         p.fill(255);
 
         p.textAlign(p.LEFT,p.CENTER);
 
-        p.text(tekst,p.width/2-145,y+25);
+        p.text(tekst,x-w/2+5,y+25);
 
         p.textSize(15);
         p.fill(150);
@@ -95,7 +120,7 @@ public class TekstFelt {
     public void runKeys(){
         handleCharacter();
     }
-
+    
     public void resetTekst(){
         tekst = "";
     }

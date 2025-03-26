@@ -29,7 +29,7 @@ void setup(){
 
     salt = saltGen.genRandString(20);
     
-    kode = new TekstFelt(this,300,350,300,50,"Kodeord");
+    kode = new TekstFelt(this,width/2,350,300,50,"Kodeord");
     LogInd = new Knap(this, width/2, 420,300,50,"Log Ind","getPassword",hr,hg,hb,cr,cg,cb);
     reset = new Knap(this, 720, 30,100,50,"Fjern alt data","ResetData",235,3,3,0,0,0);
     WipeYes = new Knap(this, width/2+100, height/2+100,100,50,"Ja","WipeDatabase",235,3,3,cr,cg,cb);
@@ -63,7 +63,7 @@ void draw(){
         textSize(25);
     }
 
-    if(Side == 1 && passwordMatch==true){
+    if(Side == 1 ){ //&& passwordMatch==true
         homescreen.runDisplay();
     }else{Side=0;}
 
