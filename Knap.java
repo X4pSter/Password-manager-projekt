@@ -21,9 +21,6 @@ public class Knap{
       cr = crin;
       cg = cgin;
       cb = cbin;
-      
-      
-
     }
 
     private void display(){

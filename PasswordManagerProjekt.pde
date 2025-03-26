@@ -1,4 +1,5 @@
-import java.io.File;
+import java.io.*;
+import java.nio.file.*;
 
 TekstFelt kode;
 Knap LogInd, reset,tilføj,LogAf;
@@ -16,16 +17,26 @@ String password;
 JSONObject db,pw,s;
 RandomString saltGen = new RandomString();
 String salt;
-AES aes;
+AES aes = new AES();
 Hash512 hash = new Hash512();
 Hash256 hash256 = new Hash256();
 boolean passwordMatch = false;
 String hashedTemp;
-File dbCheck = new File("db.json");
+Path dbPath = Paths.get(sketchPath("db.json"));
+//File dbCheck = new File("C:\PasswordManagerProjekt\db.json");
 int Side = 0;
+TekstFelt newPassword;
+Knap setNewPassword;
+String test69 = "Very Secure Password";
 
 void setup(){
     size(800,800);
+
+    String temp50 = sketchPath("db.json");
+
+    println(temp50);
+
+    println(Files.exists(dbPath));
 
     salt = saltGen.genRandString(20);
     
@@ -42,17 +53,18 @@ void setup(){
 
     homescreen = new Homescreen(this,tilføj, LogAf);
 
-    if(dbCheck.exists()){
+    newPassword = new TekstFelt(this, 100, 100, 100, 100, "Indtast nyt kodeord");
+    setNewPassword = new Knap(this, 200, 100, 100, 100, "ting", "NewPassword",100,100,100,100,100,100);
+
+    /*if(dbCheck.exists()){
         println("exists");
 
         db = loadJSONObject("db.json");
     } else{
         db = new JSONObject();
 
-        db.setString("salt",rand.genRandString(20));
-
         saveJSONObject(db,"db.json");
-    }
+    }*/
 }
 
 void draw(){
@@ -65,12 +77,14 @@ void draw(){
 
     if(Side == 1 ){ //&& passwordMatch==true
         homescreen.runDisplay();
-    }else{Side=0;}
+    } else{Side=0;}
 
     if(TrykReset == true){
         forside.DataWipe();
 
     }
+
+    setNewPassword.runDisplay();
 
 }
 
@@ -81,7 +95,7 @@ void keyPressed(){
 void mousePressed(){
     if(Side==0){forside.runMouse();}
     if(Side==1){homescreen.runMouse();}
-
+    setNewPassword.mouseClickDetection();
 }
 
 void getPassword(){
@@ -107,6 +121,28 @@ void getPassword(){
     // Side = 1;
  
 
+}
+
+void NewPassword(){
+    db = new JSONObject();
+
+    //String passwordTemp = newPassword.getTekst();
+
+    String passwordTemp = test69;
+
+    String saltTemp = saltGen.genRandString(20);
+
+    String hashedTemp = hash.hashString(passwordTemp, saltTemp);
+
+    String encryptedTemp = aes.encrypt(hashedTemp,hashedTemp,saltTemp);
+
+    String encryptedSalt = aes.encrypt(saltTemp,hashedTemp,saltTemp); 
+
+    db.setString("Password", encryptedTemp);
+
+    db.setString("Salt", encryptedSalt);
+
+    saveJSONObject(db,"db.json");
 }
 
 void ResetData(){
