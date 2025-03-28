@@ -20,13 +20,11 @@ public class RandomString {
     }
 
     public String genRandString(int l){
-        String randString = "";
-
         if(randomBytes == null){
             genSeed(l);
         }
 
-        randString = new String(randomBytes,StandardCharsets.UTF_8);
+        String randString = new String(randomBytes,StandardCharsets.UTF_8);
         return(randString);
     }
 

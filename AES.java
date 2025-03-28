@@ -67,7 +67,10 @@ class AES{
   
             // Create KeySpec object and assign with 
             // constructor 
-            KeySpec spec = new PBEKeySpec(SECRET_KEY.toCharArray(), SALT.getBytes(), 65536, 256); 
+
+            byte[] temp = SALT.getBytes();
+
+            KeySpec spec = new PBEKeySpec(SECRET_KEY.toCharArray(), temp, 65536, 256); 
 
             SecretKey tmp = factory.generateSecret(spec); 
             SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES"); 

@@ -1,5 +1,4 @@
 import java.io.*;
-import java.nio.file.*;
 
 TekstFelt kode;
 Knap LogInd, reset,tilføj,LogAf;
@@ -13,17 +12,14 @@ int cr = 3, cg = 102, cb = 214;
 Boolean TrykReset = false;
 RandomString rand = new RandomString();
 AES test = new AES();
-String password;
 JSONObject db,pw,s;
 RandomString saltGen = new RandomString();
 String salt;
 AES aes = new AES();
 Hash512 hash = new Hash512();
-Hash256 hash256 = new Hash256();
 boolean passwordMatch = false;
 String hashedTemp;
-Path dbPath = Paths.get(sketchPath("db.json"));
-//File dbCheck = new File("C:\PasswordManagerProjekt\db.json");
+File dbCheck = new File("C:\\GitHub_repositories\\Passwordmanagerprojekt\\db.json");
 int Side = 0;
 TekstFelt newPassword;
 Knap setNewPassword;
@@ -31,12 +27,6 @@ String test69 = "Very Secure Password";
 
 void setup(){
     size(800,800);
-
-    String temp50 = sketchPath("db.json");
-
-    println(temp50);
-
-    println(Files.exists(dbPath));
 
     salt = saltGen.genRandString(20);
     
@@ -56,15 +46,13 @@ void setup(){
     newPassword = new TekstFelt(this, 100, 100, 100, 100, "Indtast nyt kodeord");
     setNewPassword = new Knap(this, 200, 100, 100, 100, "ting", "NewPassword",100,100,100,100,100,100);
 
-    /*if(dbCheck.exists()){
-        println("exists");
-
+    if(dbCheck.exists()){
         db = loadJSONObject("db.json");
     } else{
         db = new JSONObject();
 
         saveJSONObject(db,"db.json");
-    }*/
+    }
 }
 
 void draw(){
@@ -99,21 +87,28 @@ void mousePressed(){
 }
 
 void getPassword(){
-    
-    
-    println("test forside");
-    password = kode.getTekst();
-    println(password);
+    //println("test forside");
 
-    String saltyPassword = password + salt;
+    String test70 = kode.getTekst();
+
+    String passwordTemp = kode.getTekst();
+
+    println(test70);
+
+    println(passwordTemp);
+
+    String dbSalt = db.getString("Salt");
+
+    String saltTemp = aes.decrypt(dbSalt,passwordTemp,passwordTemp);
+
+    String saltyPassword = passwordTemp + saltTemp;
     String hashyPassword = hash.encryptThisString(saltyPassword);
 
-    JSONArray tempJA = loadJSONArray("db.json");
-    JSONObject tempJO = tempJA.getJSONObject(0);
-
-    String temp = tempJO.getString("password");
-    String encryptyPassword = aes.encrypt(hashyPassword,hashyPassword,salt);
+    String encryptyPassword = aes.encrypt(hashyPassword,hashyPassword,saltTemp);
+    
     println(encryptyPassword);
+
+    String temp = db.getString("Password");
 
     passwordMatch = temp.equals(encryptyPassword);
     println(passwordMatch);
@@ -136,7 +131,7 @@ void NewPassword(){
 
     String encryptedTemp = aes.encrypt(hashedTemp,hashedTemp,saltTemp);
 
-    String encryptedSalt = aes.encrypt(saltTemp,hashedTemp,saltTemp); 
+    String encryptedSalt = aes.encrypt(saltTemp,passwordTemp,passwordTemp);
 
     db.setString("Password", encryptedTemp);
 
