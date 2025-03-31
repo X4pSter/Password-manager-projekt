@@ -55,9 +55,6 @@ void setup(){
 
     homescreen = new Homescreen(this,tilføj, LogAf);
 
-
-    String temp3 = "oog" + salt;
-
     homescreen = new Homescreen(this,tilføj, LogAf);
 
     addkodeside = new AddKodeSide(this,tilbageKnap,webnavn,AddKodeTekst);
@@ -87,7 +84,7 @@ void setup(){
     }
 
     loadCorrectButtons(dbExisted);
-    db.setJSONObject(0,pw);
+    //db.setJSONObject(0,pw);
     
 }
 
@@ -209,8 +206,4 @@ void loadCorrectButtons(boolean b){
 
 void changeObfuscationFunc(){
     kode.changeObfuscation();
-}
-
-void NyData(){
-
 }

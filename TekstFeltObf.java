@@ -121,6 +121,7 @@ public class TekstFeltObf {
     
     public void resetTekst(){
         tekst = "";
+        displayedTekst = "";
     }
 
     public void changeObfuscation(){
