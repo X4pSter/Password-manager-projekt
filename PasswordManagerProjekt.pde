@@ -45,18 +45,22 @@ void setup(){
     if(dbPath.exists()){
         db = loadJSONObject("db.json");
 
-        dbExisted = true;
+        String temp = db.getString("Salt");
+
+        if(temp == null){
+            db = new JSONObject();
+
+            saveJSONObject(db,"db.json");
+        } else{
+            dbExisted = true;
+        }
     } else{
         db = new JSONObject();
 
         saveJSONObject(db,"db.json");
     }
 
-    println(dbExisted);
-
     if(!dbExisted){
-        println("runs");
-
         LogInd = new Knap(this, width/2, 420,300,50,"Indstil nyt Kodeord","newPassword",hr,hg,hb,cr,cg,cb);
 
         kode = new TekstFelt(this,width/2,350,300,50,"Indtast nyt Kodeord");
@@ -99,8 +103,6 @@ void mousePressed(){
 }
 
 void getPassword(){
-    //println("test forside");
-
     String passwordTemp = kode.getTekst();
 
     String dbSalt = db.getString("Salt");
@@ -137,13 +139,12 @@ void newPassword(){
     db.setString("Salt", encryptedSalt);
 
     saveJSONObject(db,"db.json");
+
+    Side = 1;
 }
 
 void ResetData(){
-    println("test reset");
     TrykReset = true;
-    println("TrykReset = " + TrykReset);
-
 }
 
 void WipeDatabase(){
