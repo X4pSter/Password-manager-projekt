@@ -104,7 +104,7 @@ void draw(){
 
     if(Side == 1 && passwordMatch==true){
         homescreen.runDisplay();
-    } else  if(Side == 2){
+    } else  if(Side == 2 && passwordMatch==true){
         addkodeside.runDisplay();
         textSize(25);
     } else{Side=0;}
