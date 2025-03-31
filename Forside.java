@@ -6,32 +6,34 @@ public class Forside{
 
     private Knap LogIn, reset;
     private Knap WipeYes, WipeNo;
-    private TekstFelt tekstFelt1;
+    private Knap changeObfuscation;
+    private TekstFeltObf tekstFeltObf;
     private String LI = "Log Ind";
     
-    public Forside(PApplet p, Knap li, Knap re,TekstFelt t1,Knap WY, Knap WN){
+    public Forside(PApplet p, Knap li, Knap re,TekstFeltObf tobf,Knap WY, Knap WN, Knap CO){
         this.p = p;
         LogIn = li;
         reset = re;
-        tekstFelt1 = t1;
+        tekstFeltObf = tobf;
         WipeYes = WY;
         WipeNo = WN;
+        changeObfuscation = CO;
     }
 
     public void runDisplay(){
-        tekstFelt1.runDisplay();
+        tekstFeltObf.runDisplay();
         LogIn.runDisplay();
         reset.runDisplay();
+        changeObfuscation.runDisplay();
         
         p.textSize(50);
         p.fill(255);
         p.textAlign(p.CENTER);
         p.text(LI,p.width/2,270);
-
     }
 
     public void runKeys(){
-        tekstFelt1.runKeys();
+        tekstFeltObf.runKeys();
     }
     public void runMouse(){
         LogIn.mouseClickDetection();
@@ -40,9 +42,9 @@ public class Forside{
         WipeYes.mouseClickDetection();
         WipeNo.mouseClickDetection();
 
-        tekstFelt1.mouseClickDetection();
-    
-        
+        changeObfuscation.mouseClickDetection();
+
+        tekstFeltObf.mouseClickDetection();
     }
 
     public void DataWipe(){

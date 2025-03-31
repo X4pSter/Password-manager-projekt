@@ -1,10 +1,12 @@
 import processing.core.*;
 
-public class TekstFelt {
+public class TekstFeltObf {
 
     private PApplet p;
 
     private String tekst = "";
+
+    private String displayedTekst = "";
 
     private float w, h, sw;
 
@@ -14,9 +16,11 @@ public class TekstFelt {
 
     private boolean Click = false;
 
+    private boolean obfuscation = true;
+
     private int R=100, G=100, B=100;
 
-    public TekstFelt(PApplet p, float x, float y, float w, float h, String titel){
+    public TekstFeltObf(PApplet p, float x, float y, float w, float h, String titel){
         this.p = p;
 
         this.x = x;
@@ -55,14 +59,16 @@ public class TekstFelt {
             
         if(p.key != p.CODED && p.keyCode != p.ENTER && p.keyCode != p.RETURN){
             tekst += p.str(p.key);
+            if(obfuscation){displayedTekst += "*";}
+            else{displayedTekst = tekst;}
         }
         if(p.key == p.BACKSPACE){
             if(tekst.length() > 1){
                 tekst = tekst.substring(0,tekst.length() - 2);
-                p.println(tekst);
+                displayedTekst = displayedTekst.substring(0,displayedTekst.length() - 2);
             } else{
                 tekst = "";
-                p.println(tekst);
+                displayedTekst = "";
             }
         }
             
@@ -71,13 +77,6 @@ public class TekstFelt {
     }
 
     private void display(){
-        w = p.textWidth(tekst + "w");
-          
-        if(w < sw){
-           w = sw;
-
-        }
-
         p.rectMode(p.CORNER);
 
         p.fill(29,33,37);
@@ -91,7 +90,7 @@ public class TekstFelt {
 
         p.textAlign(p.LEFT,p.CENTER);
 
-        p.text(tekst,x-w/2+5,y+25);
+        p.text(displayedTekst,x-w/2+5,y+25);
 
         p.textSize(15);
         p.fill(150);
@@ -101,6 +100,10 @@ public class TekstFelt {
 
     public void setTekst(String t){
         tekst = t;
+        displayedTekst = "";
+        for(int i = 0; i < tekst.length(); i++){
+            displayedTekst += "*";
+        }
     }
 
     public String getTekst(){
@@ -118,5 +121,21 @@ public class TekstFelt {
     
     public void resetTekst(){
         tekst = "";
+    }
+
+    public void changeObfuscation(){
+        if(obfuscation){
+            obfuscation = false;
+
+            displayedTekst = tekst;
+        } else if(!obfuscation){
+            obfuscation = true;
+            
+            displayedTekst = "";
+
+            for(int i = 0; i < tekst.length(); i++){
+                displayedTekst += "*";
+            }
+        }
     }
 }

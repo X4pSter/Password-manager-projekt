@@ -1,6 +1,6 @@
 import java.io.File;
 
-TekstFelt kode;
+TekstFeltObf kode;
 Knap LogInd, reset,tilføj,LogAf;
 Knap WipeYes, WipeNo;
 Forside forside;
@@ -24,6 +24,7 @@ TekstFelt newPassword;
 Knap setNewPassword;
 //String test69 = "Very Secure Password";
 boolean dbExisted;
+Knap changeObfuscation;
 
 void setup(){
     size(800,800);
@@ -36,6 +37,8 @@ void setup(){
 
     tilføj = new Knap(this, width/2, 350,300,50,"Tilføj Password","NyData",hr,hg,hb,cr,cg,cb);
     LogAf = new Knap(this, 80, 30,100,50,"Log Af","Tilbage",hr,hg,hb,cr,cg,cb);
+
+    changeObfuscation = new Knap(this,width/2-235,355,150,40,"Show/Hide Password","changeObfuscationFunc",hr,hg,hb,cr,cg,cb);
 
     homescreen = new Homescreen(this,tilføj, LogAf);
 
@@ -108,8 +111,10 @@ void getPassword(){
     String temp = db.getString("Password");
 
     passwordMatch = temp.equals(encryptyPassword);
-    
-    Side = 1;
+
+    if(passwordMatch){
+        Side = 1;
+    }
 }
 
 void newPassword(){
@@ -157,14 +162,18 @@ void loadCorrectButtons(boolean b){
     if(!b){
         LogInd = new Knap(this, width/2, 420,300,50,"Indstil nyt Kodeord","newPassword",hr,hg,hb,cr,cg,cb);
 
-        kode = new TekstFelt(this,width/2,350,300,50,"Indtast nyt Kodeord");
+        kode = new TekstFeltObf(this,width/2,350,300,50,"Indtast nyt Kodeord");
 
-        forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo);
+        forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo,changeObfuscation);
     } else{
-        kode = new TekstFelt(this,width/2,350,300,50,"Kodeord");
+        kode = new TekstFeltObf(this,width/2,350,300,50,"Kodeord");
 
         LogInd = new Knap(this, width/2, 420,300,50,"Log Ind","getPassword",hr,hg,hb,cr,cg,cb);
 
-        forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo);
+        forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo,changeObfuscation);
     }
+}
+
+void changeObfuscationFunc(){
+    kode.changeObfuscation();
 }
