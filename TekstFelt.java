@@ -116,6 +116,7 @@ public class TekstFelt {
         handleCharacter();
     }
     
+
     public void resetTekst(){
         tekst = "";
     }

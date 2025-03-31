@@ -50,6 +50,13 @@ void setup(){
     webnavn = new TekstFelt(this,width/2-125,300,300,50,"Websted navn");
 
     changeObfuscation = new Knap(this,width/2-235,355,150,40,"Show/Hide Password","changeObfuscationFunc",hr,hg,hb,cr,cg,cb);
+    tilføj = new Knap(this, width/2, 350,300,50,"Tilføj Password","NyData",hr,hg,hb,cr,cg,cb);
+    LogAf = new Knap(this, 80, 30,100,50,"Log Af","Tilbage",hr,hg,hb,cr,cg,cb);
+
+    homescreen = new Homescreen(this,tilføj, LogAf);
+
+
+    String temp3 = "oog" + salt;
 
     homescreen = new Homescreen(this,tilføj, LogAf);
 
@@ -80,6 +87,8 @@ void setup(){
     }
 
     loadCorrectButtons(dbExisted);
+    db.setJSONObject(0,pw);
+    
 }
 
 void draw(){
@@ -90,7 +99,7 @@ void draw(){
         textSize(25);
     }
 
-    if(Side == 1 ){ //&& passwordMatch==true
+    if(Side == 1 && passwordMatch==true){
         homescreen.runDisplay();
     } else  if(Side == 2){
         addkodeside.runDisplay();
@@ -175,7 +184,6 @@ void Tilbage(){
     if(Side <= 2){Side --;}else{Side = 0;}
     TrykReset = false;
     kode.resetTekst();
-        
 }
 
 
@@ -201,4 +209,8 @@ void loadCorrectButtons(boolean b){
 
 void changeObfuscationFunc(){
     kode.changeObfuscation();
+}
+
+void NyData(){
+
 }
