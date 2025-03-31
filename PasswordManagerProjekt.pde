@@ -1,10 +1,19 @@
 import java.io.File;
 
-TekstFelt kode;
-Knap LogInd, reset,tilføj,LogAf;
+TekstFelt kode,webnavn;
+Knap LogInd, reset,tilføj,LogAf,tilbageKnap;
 Knap WipeYes, WipeNo;
+
+TekstFelt newPassword;
+Knap setNewPassword;
+String AddKodeTekst = "Tilføj data";
+
+//Sider
 Forside forside;
 Homescreen homescreen;
+AddKodeSide addkodeside;
+
+//Kryptering
 RandomString test2;
 String testString;
 int hr = 128, hg = 183, hb = 245;
@@ -20,8 +29,6 @@ boolean passwordMatch = false;
 String hashedTemp;
 File dbPath;
 int Side = 0;
-TekstFelt newPassword;
-Knap setNewPassword;
 //String test69 = "Very Secure Password";
 boolean dbExisted;
 
@@ -36,8 +43,13 @@ void setup(){
 
     tilføj = new Knap(this, width/2, 350,300,50,"Tilføj Password","NyData",hr,hg,hb,cr,cg,cb);
     LogAf = new Knap(this, 80, 30,100,50,"Log Af","Tilbage",hr,hg,hb,cr,cg,cb);
+    tilbageKnap = new Knap(this, 80, 30,100,50,"Tilbage","Tilbage",hr,hg,hb,cr,cg,cb);
+
+    webnavn = new TekstFelt(this,width/2-125,300,300,50,"Websted navn");
 
     homescreen = new Homescreen(this,tilføj, LogAf);
+
+    addkodeside = new AddKodeSide(this,tilbageKnap,webnavn,AddKodeTekst);
 
     dbPath = new File(sketchPath("db.json"));
 
@@ -76,6 +88,9 @@ void draw(){
 
     if(Side == 1 ){ //&& passwordMatch==true
         homescreen.runDisplay();
+    } else  if(Side == 2){
+        addkodeside.runDisplay();
+        textSize(25);
     } else{Side=0;}
 
     if(TrykReset == true){
@@ -86,11 +101,13 @@ void draw(){
 
 void keyPressed(){
     if(Side==0){forside.runKeys();}
+    if(Side==2){addkodeside.runKeys();}
 }
 
 void mousePressed(){
     if(Side==0){forside.runMouse();}
     if(Side==1){homescreen.runMouse();}
+    if(Side==2){addkodeside.runMouse();}
 }
 
 void getPassword(){
@@ -109,7 +126,10 @@ void getPassword(){
 
     passwordMatch = temp.equals(encryptyPassword);
     
-    Side = 1;
+    if(passwordMatch){
+        Side = 1;
+    }
+    
 }
 
 void newPassword(){
@@ -147,10 +167,17 @@ void WipeDatabase(){
     setup();
 }
 
+
 void Tilbage(){
+    if(Side <= 2){Side --;}else{Side = 0;}
     TrykReset = false;
-    if(Side <= 1){Side --;}else{Side = 0;}
     kode.resetTekst();
+        
+}
+
+
+void NyData(){
+    Side = 2;
 }
 
 void loadCorrectButtons(boolean b){

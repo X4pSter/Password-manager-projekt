@@ -96,7 +96,7 @@ public class TekstFelt {
         p.textSize(15);
         p.fill(150);
         p.textAlign(p.LEFT);
-        p.text(titel,p.width/2-150,y-15);
+        p.text(titel,x-w/2+5,y-15);
 
 
 
