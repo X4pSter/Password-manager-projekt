@@ -1,8 +1,8 @@
 import java.io.File;
 
-TekstFelt webnavn;
+TekstFelt webnavn,brugernavn,webKode,url,note;
 TekstFeltObf kode;
-Knap LogInd, reset,tilføj,LogAf,tilbageKnap;
+Knap LogInd, reset,tilføj,anuller,godkend,LogAf,tilbageKnap;
 Knap WipeYes, WipeNo;
 
 TekstFelt newPassword;
@@ -46,18 +46,24 @@ void setup(){
     tilføj = new Knap(this, width/2, 350,300,50,"Tilføj Password","NyData",hr,hg,hb,cr,cg,cb);
     LogAf = new Knap(this, 80, 30,100,50,"Log Af","Tilbage",hr,hg,hb,cr,cg,cb);
     tilbageKnap = new Knap(this, 80, 30,100,50,"Tilbage","Tilbage",hr,hg,hb,cr,cg,cb);
+    anuller = new Knap(this, width/2-200, height-125,200,50,"Anuller","Tilbage",hr,hg,hb,cr,cg,cb);
+    godkend = new Knap(this, width/2+200, height-125,200,50,"Godkend","Data",hr,hg,hb,cr,cg,cb);
 
-    webnavn = new TekstFelt(this,width/2-125,300,300,50,"Websted navn");
 
-    changeObfuscation = new Knap(this,width/2-235,355,150,40,"Show/Hide Password","changeObfuscationFunc",hr,hg,hb,cr,cg,cb);
+    webnavn = new TekstFelt(this,width/2-155,300,300,50,"Websted navn");
+    brugernavn = new TekstFelt(this,width/2-155,400,300,50,"Brugernavn");
+    webKode = new TekstFelt(this,width/2-155,500,300,50,"Kodeord");
+    url = new TekstFelt(this,width/2+155,400,300,50,"URL");
+    note = new TekstFelt(this,width/2+155,500,300,50,"Note");
+
+    changeObfuscation = new Knap(this,width/2+200,355,70,40,"Vis kode","changeObfuscationFunc",100,100,100,0,0,0);
     tilføj = new Knap(this, width/2, 350,300,50,"Tilføj Password","NyData",hr,hg,hb,cr,cg,cb);
     LogAf = new Knap(this, 80, 30,100,50,"Log Af","Tilbage",hr,hg,hb,cr,cg,cb);
 
     homescreen = new Homescreen(this,tilføj, LogAf);
 
-    homescreen = new Homescreen(this,tilføj, LogAf);
 
-    addkodeside = new AddKodeSide(this,tilbageKnap,webnavn,AddKodeTekst);
+    addkodeside = new AddKodeSide(this,tilbageKnap,anuller,godkend,webnavn,brugernavn,webKode,url,note,AddKodeTekst);
 
     dbPath = new File(sketchPath("db.json"));
 
@@ -181,6 +187,7 @@ void Tilbage(){
     if(Side <= 2){Side --;}else{Side = 0;}
     TrykReset = false;
     kode.resetTekst();
+    addkodeside.resetTekst();
 }
 
 
