@@ -23,6 +23,7 @@ int Side = 0;
 TekstFelt newPassword;
 Knap setNewPassword;
 //String test69 = "Very Secure Password";
+boolean dbExisted;
 
 void setup(){
     size(800,800);
@@ -40,14 +41,14 @@ void setup(){
 
     dbPath = new File(sketchPath("db.json"));
 
-    boolean dbExisted = false;
-
     if(dbPath.exists()){
         db = loadJSONObject("db.json");
 
         String temp = db.getString("Salt");
 
         if(temp == null){
+            dbExisted = false;
+
             db = new JSONObject();
 
             saveJSONObject(db,"db.json");
@@ -55,24 +56,14 @@ void setup(){
             dbExisted = true;
         }
     } else{
+        dbExisted = false;
+
         db = new JSONObject();
 
         saveJSONObject(db,"db.json");
     }
 
-    if(!dbExisted){
-        LogInd = new Knap(this, width/2, 420,300,50,"Indstil nyt Kodeord","newPassword",hr,hg,hb,cr,cg,cb);
-
-        kode = new TekstFelt(this,width/2,350,300,50,"Indtast nyt Kodeord");
-
-        forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo);
-    } else{
-        kode = new TekstFelt(this,width/2,350,300,50,"Kodeord");
-
-        LogInd = new Knap(this, width/2, 420,300,50,"Log Ind","getPassword",hr,hg,hb,cr,cg,cb);
-
-        forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo);
-    }
+    loadCorrectButtons(dbExisted);
 }
 
 void draw(){
@@ -140,6 +131,10 @@ void newPassword(){
 
     saveJSONObject(db,"db.json");
 
+    dbExisted = true;
+
+    loadCorrectButtons(dbExisted);
+
     Side = 1;
 }
 
@@ -156,4 +151,20 @@ void Tilbage(){
     TrykReset = false;
     if(Side <= 1){Side --;}else{Side = 0;}
     kode.resetTekst();
+}
+
+void loadCorrectButtons(boolean b){
+    if(!b){
+        LogInd = new Knap(this, width/2, 420,300,50,"Indstil nyt Kodeord","newPassword",hr,hg,hb,cr,cg,cb);
+
+        kode = new TekstFelt(this,width/2,350,300,50,"Indtast nyt Kodeord");
+
+        forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo);
+    } else{
+        kode = new TekstFelt(this,width/2,350,300,50,"Kodeord");
+
+        LogInd = new Knap(this, width/2, 420,300,50,"Log Ind","getPassword",hr,hg,hb,cr,cg,cb);
+
+        forside = new Forside(this, LogInd, reset, kode,WipeYes,WipeNo);
+    }
 }
