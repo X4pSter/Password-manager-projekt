@@ -51,29 +51,25 @@ public class TekstFeltObf {
         }
     }
 
-
-
     private void handleCharacter(){
         
         if(Click==true){
             
-        if(p.key != p.CODED && p.keyCode != p.ENTER && p.keyCode != p.RETURN){
-            tekst += p.str(p.key);
-            if(obfuscation){displayedTekst += "*";}
-            else{displayedTekst = tekst;}
-        }
-        if(p.key == p.BACKSPACE){
-            if(tekst.length() > 1){
-                tekst = tekst.substring(0,tekst.length() - 2);
-                displayedTekst = displayedTekst.substring(0,displayedTekst.length() - 2);
-            } else{
-                tekst = "";
-                displayedTekst = "";
+            if(p.key != p.CODED && p.keyCode != p.ENTER && p.keyCode != p.RETURN){
+                tekst += p.str(p.key);
+                if(obfuscation){displayedTekst += "*";}
+                else{displayedTekst = tekst;}
+            }
+            if(p.key == p.BACKSPACE){
+                if(tekst.length() > 1){
+                    tekst = tekst.substring(0,tekst.length() - 2);
+                     displayedTekst = displayedTekst.substring(0,displayedTekst.length() - 2);
+                } else{
+                    tekst = "";
+                    displayedTekst = "";
+                }
             }
         }
-            
-    }
-
     }
 
     private void display(){
