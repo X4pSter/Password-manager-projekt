@@ -209,6 +209,7 @@ void Tilbage(){
     TrykReset = false;
     kode.resetTekst();
     addkodeside.resetTekst();
+    kode.changeObfuscation();
 }
 
 
