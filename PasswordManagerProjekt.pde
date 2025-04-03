@@ -149,8 +149,6 @@ void getPassword(){
 
     JSONObject tempObject2 = db.getJSONObject(0);
 
-    println(tempObject2);
-
     String temp = tempObject2.getString("Password");
 
     passwordMatch = temp.equals(encryptyPassword);
@@ -209,7 +207,6 @@ void Tilbage(){
     TrykReset = false;
     kode.resetTekst();
     addkodeside.resetTekst();
-    kode.changeObfuscation();
 }
 
 
@@ -258,7 +255,27 @@ void Data(){
     salt.setString("Salt",aes.encrypt(newSalt,key,key));
     newService.setJSONObject(3,salt);
 
-    db.setJSONArray(2,newService);
+    int repetitions = 0;
 
-    saveJSONArray(db,"db.json");
+    boolean empty = db.isNull(repetitions);
+
+    println(empty);
+
+    while(!empty){
+        println(repetitions);
+        empty = db.isNull(repetitions);
+        if(empty){
+            break;
+        }
+        println(empty);
+        repetitions++;
+    }
+
+    println(repetitions);
+
+    if(empty){
+        db.setJSONArray(repetitions,newService);
+
+        saveJSONArray(db,"db.json");
+    }
 }
