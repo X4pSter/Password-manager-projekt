@@ -66,4 +66,10 @@ public class Forside{
         WipeYes.runDisplay();
         WipeNo.runDisplay();
     }
+
+    public void forkertKode(){
+        p.fill(255, 38, 23);
+        p.textSize(20);
+        p.text("Forkert kodeord, prøv igen", p.width/2,500);
+    }
 }

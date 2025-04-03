@@ -22,7 +22,8 @@ int cr = 3, cg = 102, cb = 214;
 Boolean TrykReset;
 RandomString rand = new RandomString();
 AES test = new AES();
-JSONObject db,pw,s;
+JSONObject pw,s;
+JSONArray db;
 RandomString saltGen = new RandomString();
 AES aes = new AES();
 Hash512 hash = new Hash512();
@@ -33,6 +34,8 @@ int Side = 0;
 //String test69 = "Very Secure Password";
 boolean dbExisted;
 Knap changeObfuscation;
+String key;
+int attempts;
 
 void setup(){
     size(800,800);
@@ -68,25 +71,26 @@ void setup(){
     dbPath = new File(sketchPath("db.json"));
 
     if(dbPath.exists()){
-        db = loadJSONObject("db.json");
+        db = loadJSONArray("db.json");
 
-        String temp = db.getString("Salt");
+        JSONObject tempObject = db.getJSONObject(1);
+        String temp = tempObject.getString("Salt");
 
         if(temp == null){
             dbExisted = false;
 
-            db = new JSONObject();
+            db = new JSONArray();
 
-            saveJSONObject(db,"db.json");
+            saveJSONArray(db,"db.json");
         } else{
             dbExisted = true;
         }
     } else{
         dbExisted = false;
 
-        db = new JSONObject();
+        db = new JSONArray();
 
-        saveJSONObject(db,"db.json");
+        saveJSONArray(db,"db.json");
     }
 
     loadCorrectButtons(dbExisted);
@@ -113,6 +117,10 @@ void draw(){
         forside.DataWipe();
 
     }
+
+    if(!passwordMatch && attempts >= 1){
+        forside.forkertKode();
+    }
 }
 
 void keyPressed(){
@@ -129,26 +137,35 @@ void mousePressed(){
 void getPassword(){
     String passwordTemp = kode.getTekst();
 
-    String dbSalt = db.getString("Salt");
+    JSONObject tempObject = db.getJSONObject(1);
+
+    String dbSalt = tempObject.getString("Salt");
 
     String saltTemp = aes.decrypt(dbSalt,passwordTemp,passwordTemp);
 
-    String saltyPassword = passwordTemp + saltTemp;
-    String hashyPassword = hash.encryptThisString(saltyPassword);
+    String hashyPassword = hash.hashString(passwordTemp,saltTemp);
 
     String encryptyPassword = aes.encrypt(hashyPassword,hashyPassword,saltTemp);
 
-    String temp = db.getString("Password");
+    JSONObject tempObject2 = db.getJSONObject(0);
+
+    println(tempObject2);
+
+    String temp = tempObject2.getString("Password");
 
     passwordMatch = temp.equals(encryptyPassword);
 
     if(passwordMatch){
         Side = 1;
+
+        key = hashyPassword;
     }
+
+    attempts++;
 }
 
 void newPassword(){
-    db = new JSONObject();
+    db = new JSONArray();
 
     String passwordTemp = kode.getTekst();
 
@@ -160,11 +177,15 @@ void newPassword(){
 
     String encryptedSalt = aes.encrypt(saltTemp,passwordTemp,passwordTemp);
 
-    db.setString("Password", encryptedTemp);
+    JSONObject password = new JSONObject();
+    password.setString("Password",encryptedTemp);
+    db.setJSONObject(0,password);
 
-    db.setString("Salt", encryptedSalt);
+    JSONObject salt = new JSONObject();
+    salt.setString("Salt",encryptedSalt);
+    db.setJSONObject(1,salt);
 
-    saveJSONObject(db,"db.json");
+    saveJSONArray(db,"db.json");
 
     dbExisted = true;
 
@@ -213,4 +234,30 @@ void loadCorrectButtons(boolean b){
 
 void changeObfuscationFunc(){
     kode.changeObfuscation();
+}
+
+void Data(){
+    JSONArray newService = new JSONArray();
+
+    JSONObject name = new JSONObject();
+    name.setString("Name",webnavn.getTekst());
+    newService.setJSONObject(0,name);
+
+    JSONObject username = new JSONObject();
+    username.setString("Username",brugernavn.getTekst());
+    newService.setJSONObject(1,username);
+
+    JSONObject password = new JSONObject();
+    RandomString newSaltGen = new RandomString();
+    String newSalt = newSaltGen.genRandString(20);
+    password.setString("Password",aes.encrypt(webKode.getTekst(),key,newSalt));
+    newService.setJSONObject(2,password);
+
+    JSONObject salt = new JSONObject();
+    salt.setString("Salt",aes.encrypt(newSalt,key,key));
+    newService.setJSONObject(3,salt);
+
+    db.setJSONArray(2,newService);
+
+    saveJSONArray(db,"db.json");
 }

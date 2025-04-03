@@ -1,4 +1,10 @@
-{
-  "Salt": "kKHGqPm6szIiXXVDqwX3npiVsKV16I4VfxSyCqvNm3o=",
-  "Password": "CSFcIqDI5aXzwnkyuThdr89xELB4PkKXr3Fx+8Szv3/kpM3nYEL/ILhsJeQQiYt+UQ+taEeUeoGv5Y+s8g543VNM17Ovnn5BgeQZSCH18h027hMVdNfJ315itCpnJQM3Z+QCuQIoKyR7TCURfGvywFP4gnrQxnK/o2Xq3a+0Y/3gMP34WXCrCHcjcXSRJV4G"
-}
+[
+  {"Password": "3M6YEqin4zrE7zwhInAwCWhYucaYk4SiXSw5LilDGdWfzl58SVvggo8z4VGatsdv28sn0Dzh3bbDDkKCBlNiiky/F89ED6JxmwvOUmjnq33zf/x1cCr3bJeAoF4tpzebfKgGNE7Mf2NTiXSveZ6uOd11+YRwvOylf6AnzIs7+/9hmAcbf18EYcjRXS0j+iGi"},
+  {"Salt": "YF92AxAqrFpQ5UMoo4EXEjFo037/sBaLb83jCyl4pWQ="},
+  [
+    {"Name": "test1"},
+    {"Username": "test2"},
+    {"Password": "hIczFnpOcYzfq7O+Mse4+A=="},
+    {"Salt": "tFsUDma5zPgmjePZszo0XlWxbwIK957x1ZgdEE2VXew="}
+  ]
+]
