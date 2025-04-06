@@ -121,7 +121,8 @@ void draw(){
         for(int i = 2; i < db.size(); i++){
             if (i < kodedata.length) {  // Ensure we do not exceed array size
             JSONArray dbi = db.getJSONArray(i);
-            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbi.getString(0,"Name"), "action"); 
+            JSONObject dbii = dbi.getJSONObject(0);
+            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbii.getString("Name"), "action"); 
             kodedata[i].runDisplay();
             }
             
