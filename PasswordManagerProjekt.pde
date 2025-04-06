@@ -318,13 +318,10 @@ void Data(){
     Side = 1;
     addkodeside.resetTekst();
     
-    if (repetitions + 2 < kodedata.length) { 
-        kodedata[repetitions + 2] = new Kodedata(this, width/2, repetitions*500, webnavn.getTekst(), "action");
-    }
 }
 
 void action(){
-    
+
 }
 
 

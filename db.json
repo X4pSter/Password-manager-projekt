@@ -12,5 +12,17 @@
     {"Username": "321"},
     {"Password": "x0pSWst0esI02vweLOS28Q=="},
     {"Salt": "kSQE+1bJqnkVo8uKcvJSuJaam9uAN76HTQj2F2bEQrk="}
+  ],
+  [
+    {"Name": "Lectio"},
+    {"Username": "Kabo3"},
+    {"Password": "RoUwUEdZaJcyR0FNZJjLvQ=="},
+    {"Salt": "mo0lJk0UDyfi4Lu4mw03xDM2YcEW9z2wFqEkgks3EVw="}
+  ],
+  [
+    {"Name": "Youtube"},
+    {"Username": "Random"},
+    {"Password": "s7RegryD80RkxxpnQCYttg=="},
+    {"Salt": "hjfIXqDi5qSjqPJQZdsO8y7f2F8wd/9DALOl37CaH6Q="}
   ]
 ]
