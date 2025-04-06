@@ -155,7 +155,17 @@ void keyPressed(){
 
 void mousePressed(){
     if(Side==0){forside.runMouse();}
-    if(Side==1){homescreen.runMouse();}
+    if(Side==1){
+        homescreen.runMouse();
+        for(int i = 2; i < db.size(); i++){
+            if (i < kodedata.length) {  // Ensure we do not exceed array size
+            JSONArray dbi = db.getJSONArray(i);
+            JSONObject dbii = dbi.getJSONObject(0);
+            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbii.getString("Name"), "action"); 
+            kodedata[i].mouseClickDetection();
+            }
+        }
+        }
     if(Side==2){addkodeside.runMouse();}
 }
 
@@ -313,7 +323,9 @@ void Data(){
     }
 }
 
-
+void action(){
+    
+}
 
 
 
