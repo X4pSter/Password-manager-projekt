@@ -4,13 +4,13 @@ public class AddKodeSide{
 
     private PApplet p;
 
-    private Knap tilbage,anuller,godkend;
+    private Knap tilbage,anuller,godkend, genRandPassword;
 
-    private TekstFelt webnavn,brugernavn,kodeord,url,note;
+    private TekstFelt webnavn,brugernavn,kodeord,randomLength;
 
     public String tekst;
     
-    public AddKodeSide(PApplet p, Knap tb, Knap an, Knap gk, TekstFelt wn,TekstFelt bn,TekstFelt ko,TekstFelt URL,TekstFelt nt, String tk){
+    public AddKodeSide(PApplet p, Knap tb, Knap an, Knap gk, TekstFelt wn,TekstFelt bn,TekstFelt ko, String tk, Knap grp, TekstFelt rl){
         this.p = p;
         tilbage = tb;
         anuller = an;
@@ -18,9 +18,9 @@ public class AddKodeSide{
         webnavn = wn;
         brugernavn = bn;
         kodeord = ko;
-        url = URL;
-        note = nt;
         tekst = tk;
+        genRandPassword = grp;
+        randomLength = rl;
     }
 
     public void runDisplay(){
@@ -41,23 +41,23 @@ public class AddKodeSide{
         webnavn.runDisplay();
         brugernavn.runDisplay();
         kodeord.runDisplay();
-        url.runDisplay();
-        note.runDisplay();
+        randomLength.runDisplay();
 
         anuller.runDisplay();
         godkend.runDisplay();
+        genRandPassword.runDisplay();
 
     }
 
     public void runMouse(){
         tilbage.mouseClickDetection();
         anuller.mouseClickDetection();
+        genRandPassword.mouseClickDetection();
         godkend.mouseClickDetection();
         webnavn.mouseClickDetection();
         brugernavn.mouseClickDetection();
         kodeord.mouseClickDetection();
-        url.mouseClickDetection();
-        note.mouseClickDetection();
+        randomLength.mouseClickDetection();
         
     }
 
@@ -65,16 +65,14 @@ public class AddKodeSide{
         webnavn.runKeys();
         brugernavn.runKeys();
         kodeord.runKeys();
-        url.runKeys();
-        note.runKeys();
+        randomLength.runKeys();
     }
 
     public void resetTekst(){
         webnavn.resetTekst();
         brugernavn.resetTekst();
         kodeord.resetTekst();
-        url.resetTekst();
-        note.resetTekst();
+        randomLength.resetTekst();
     }
 
 }

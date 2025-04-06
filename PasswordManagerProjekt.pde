@@ -36,6 +36,8 @@ boolean dbExisted;
 Knap changeObfuscation;
 String key;
 int attempts;
+Knap randomPassword;
+TekstFelt randLength;
 
 void setup(){
     size(800,800);
@@ -56,17 +58,17 @@ void setup(){
     webnavn = new TekstFelt(this,width/2-155,300,300,50,"Websted navn");
     brugernavn = new TekstFelt(this,width/2-155,400,300,50,"Brugernavn");
     webKode = new TekstFelt(this,width/2-155,500,300,50,"Kodeord");
-    url = new TekstFelt(this,width/2+155,400,300,50,"URL");
-    note = new TekstFelt(this,width/2+155,500,300,50,"Note");
 
     changeObfuscation = new Knap(this,width/2+200,355,70,40,"Vis kode","changeObfuscationFunc",100,100,100,0,0,0);
     tilføj = new Knap(this, width/2, 350,300,50,"Tilføj Password","NyData",hr,hg,hb,cr,cg,cb);
     LogAf = new Knap(this, 80, 30,100,50,"Log Af","Tilbage",hr,hg,hb,cr,cg,cb);
 
+    randomPassword = new Knap(this,width/2+109,500,200,50,"Generer tilfældigt kodeord","genRandPassword",hr,hg,hb,cr,cg,cb);
+    randLength = new TekstFelt(this,width/2+270,500,100,50,"Tilfældig kodeord længde");
+
     homescreen = new Homescreen(this,tilføj, LogAf);
 
-
-    addkodeside = new AddKodeSide(this,tilbageKnap,anuller,godkend,webnavn,brugernavn,webKode,url,note,AddKodeTekst);
+    addkodeside = new AddKodeSide(this,tilbageKnap,anuller,godkend,webnavn,brugernavn,webKode,AddKodeTekst,randomPassword,randLength);
 
     dbPath = new File(sketchPath("db.json"));
 
@@ -259,23 +261,35 @@ void Data(){
 
     boolean empty = db.isNull(repetitions);
 
-    println(empty);
-
     while(!empty){
-        println(repetitions);
         empty = db.isNull(repetitions);
         if(empty){
             break;
         }
-        println(empty);
         repetitions++;
     }
-
-    println(repetitions);
 
     if(empty){
         db.setJSONArray(repetitions,newService);
 
         saveJSONArray(db,"db.json");
     }
+
+    Side = 1;
+
+    addkodeside.resetTekst();
+}
+
+void genRandPassword(){
+    RandomString temp = new RandomString();
+
+    float l = float(randLength.getTekst());
+
+    if(Float.isNaN(l)){
+        l = 20;
+    }
+
+    int length = floor(l);
+
+    webKode.setTekst(temp.genRandString(length));
 }

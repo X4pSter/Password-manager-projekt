@@ -71,7 +71,7 @@ public class TekstFelt {
     }
 
     private void display(){
-        w = p.textWidth(tekst + "w");
+        //w = p.textWidth(tekst + "w");
           
         if(w < sw){
            w = sw;
