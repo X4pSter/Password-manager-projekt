@@ -5,6 +5,8 @@ TekstFeltObf kode;
 Knap LogInd, reset,tilføj,anuller,godkend,LogAf,tilbageKnap;
 Knap WipeYes, WipeNo;
 
+Kodedata[] kodedata = new Kodedata[100];
+
 TekstFelt newPassword;
 Knap setNewPassword;
 String AddKodeTekst = "Tilføj data";
@@ -36,6 +38,7 @@ boolean dbExisted;
 Knap changeObfuscation;
 String key;
 int attempts;
+int kodedataSize = 0;
 
 void setup(){
     size(800,800);
@@ -70,6 +73,9 @@ void setup(){
 
     dbPath = new File(sketchPath("db.json"));
 
+ 
+
+
     if(dbPath.exists()){
         db = loadJSONArray("db.json");
 
@@ -84,6 +90,8 @@ void setup(){
             saveJSONArray(db,"db.json");
         } else{
             dbExisted = true;
+
+        
         }
     } else{
         dbExisted = false;
@@ -107,10 +115,26 @@ void draw(){
     }
 
     if(Side == 1 && passwordMatch==true){
+          
         homescreen.runDisplay();
+
+        for(int i = 2; i < db.size(); i++){
+            if (i < kodedata.length) {  // Ensure we do not exceed array size
+            JSONArray dbi = db.getJSONArray(i);
+            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbi.getString(0,"Name"), "action"); 
+            kodedata[i].runDisplay();
+            }
+            
+        }
+        
+                
+
     } else  if(Side == 2 && passwordMatch==true){
         addkodeside.runDisplay();
         textSize(25);
+
+        
+
     } else{Side=0;}
 
     if(TrykReset == true){
@@ -157,6 +181,8 @@ void getPassword(){
         Side = 1;
 
         key = hashyPassword;
+
+        
     }
 
     attempts++;
@@ -278,4 +304,15 @@ void Data(){
 
         saveJSONArray(db,"db.json");
     }
+    Side = 1;
+    addkodeside.resetTekst();
+    
+    if (repetitions + 2 < kodedata.length) { 
+        kodedata[repetitions + 2] = new Kodedata(this, width/2, repetitions*500, webnavn.getTekst(), "action");
+    }
 }
+
+
+
+
+

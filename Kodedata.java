@@ -1,19 +1,25 @@
+
 import processing.core.*;
+
 public class Kodedata{
+
     private PApplet p;
     private int y;
     private String titel;
     private String action;
     private int b = 300;
     private int h = 50;
-    private int x = p.width/2;
+    private int x;
 
-    public Kodedata(PApplet p, int yin, String titelin, String actionin){
+
+    public Kodedata(PApplet p, int xin, int yin, String titelin, String actionin){
       this.p = p;
+      x = xin;
       y = yin; 
       titel = titelin; 
       action = actionin;
     }
+
 
     private void display(){
         if(p.mouseX < x + b/2 && p.mouseX > x-b/2 && p.mouseY < y + h && p.mouseY > y){
