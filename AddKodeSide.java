@@ -76,5 +76,6 @@ public class AddKodeSide{
         url.resetTekst();
         note.resetTekst();
     }
+    
 
 }

@@ -11,6 +11,8 @@ public class Kodedata{
     private int h = 50;
     private int x;
 
+    private boolean clicked = false;
+
 
     public Kodedata(PApplet p, int xin, int yin, String titelin, String actionin){
       this.p = p;
@@ -41,10 +43,12 @@ public class Kodedata{
     
       }
       
-      public void mouseClickDetection(){
+      public boolean mouseClickDetection(){
        if(p.mouseX < x + b/2 && p.mouseX > x-b/2 && p.mouseY < y + h && p.mouseY > y){
-         p.method(action);
+        clicked = false;
+        return true;
        }
+       return false;
       }
     
       public void runDisplay(){

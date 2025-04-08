@@ -14,7 +14,7 @@ String AddKodeTekst = "Tilføj data";
 //Sider
 Forside forside;
 Homescreen homescreen;
-AddKodeSide addkodeside;
+AddKodeSide addkodeside,sekodeside;
 
 //Kryptering
 RandomString test2;
@@ -39,6 +39,9 @@ Knap changeObfuscation;
 String key;
 int attempts;
 int kodedataSize = 0;
+int KodeNummer = 2;
+
+
 
 void setup(){
     size(800,800);
@@ -70,6 +73,7 @@ void setup(){
 
 
     addkodeside = new AddKodeSide(this,tilbageKnap,anuller,godkend,webnavn,brugernavn,webKode,url,note,AddKodeTekst);
+    sekodeside = new AddKodeSide(this,tilbageKnap,anuller,tilbageKnap,webnavn,brugernavn,webKode,url,note,AddKodeTekst);
 
     dbPath = new File(sketchPath("db.json"));
 
@@ -122,7 +126,7 @@ void draw(){
             if (i < kodedata.length) {  // Ensure we do not exceed array size
             JSONArray dbi = db.getJSONArray(i);
             JSONObject dbii = dbi.getJSONObject(0);
-            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbii.getString("Name"), "action"); 
+            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbii.getString("Name"), "SeData"); 
             kodedata[i].runDisplay();
             }
             
@@ -134,9 +138,12 @@ void draw(){
         addkodeside.runDisplay();
         textSize(25);
 
-        
-
-    } else{Side=0;}
+    }
+    else if(Side == 3 && passwordMatch ==true){
+        sekodeside.runDisplay();
+        textSize(25);
+    }
+    else{Side=0;}
 
     if(TrykReset == true){
         forside.DataWipe();
@@ -157,16 +164,24 @@ void mousePressed(){
     if(Side==0){forside.runMouse();}
     if(Side==1){
         homescreen.runMouse();
+
         for(int i = 2; i < db.size(); i++){
             if (i < kodedata.length) {  // Ensure we do not exceed array size
             JSONArray dbi = db.getJSONArray(i);
             JSONObject dbii = dbi.getJSONObject(0);
-            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbii.getString("Name"), "action"); 
-            kodedata[i].mouseClickDetection();
+            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbii.getString("Name"), "SeData"); 
+            
+            if (kodedata[i].mouseClickDetection()) {
+                KodeNummer =i;
+                SeData(); 
             }
+        }
+            
         }
         }
     if(Side==2){addkodeside.runMouse();}
+    if(Side == 3){sekodeside.runMouse();}
+    
 }
 
 void getPassword(){
@@ -240,7 +255,7 @@ void WipeDatabase(){
 
 
 void Tilbage(){
-    if(Side <= 2){Side --;}else{Side = 0;}
+    if(Side ==3){Side = 1;}else if(Side <= 2){Side --;}else{Side = 0;}
     TrykReset = false;
     kode.resetTekst();
     addkodeside.resetTekst();
@@ -320,9 +335,24 @@ void Data(){
     
 }
 
-void action(){
+void SeData(){
 
+    Side = 3;
+    JSONArray dbj = db.getJSONArray(KodeNummer);
+        JSONObject dbN = dbj.getJSONObject(0);
+        webnavn.setTekst(dbN.getString("Name"));
+
+        JSONObject dbB = dbj.getJSONObject(1);
+        brugernavn.setTekst(dbB.getString("Username"));
+
+        JSONObject dbP = dbj.getJSONObject(2);
+        webKode.setTekst(dbP.getString("Password"));
+    
+        
+    
 }
+
+
 
 
 
