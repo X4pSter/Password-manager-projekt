@@ -1,28 +1,16 @@
 [
-  {"Password": "K1tJKhAbqVykXoe4grADZwnf2CwKPP+skP/y3DEk5gzxxe8H8QQFDrwLrFOr6RxTd2LKn0p7xYTu4EaY3/x8uXiMd7JHElSxmy70zdBucxnduTYKYtciwD0WO8Nao4ZelTHBZdHpko1ZaG4T+HRHLK5NEgPVAROl77S9Y0/nWvDY52Uk4RFLNWe3MYVQt6ek"},
-  {"Salt": "N6DHvQGVxrtGbspegSML5177+LoFEzDU3gc52JOSVJg="},
+  {"Password": "cMQj0G2z0myTW1HegsAJThIA0F5HlEtrZJoFLfpjYiDgmnrCUxbXSL3x3JcIlipQ3lND5gwygqPubESMwOpENeEHv7VsrNEGISQ4c4XBjehJQQIPL9OwbqnMH5MODbNmwety4RGfp/ipTOdvNXAPu05jID4gsCKiJxvYyt3HkVT5Z4RVzrK5YtP+nWpvHMzD"},
+  {"Salt": "s86yjdkAdwz5xJfH+uAOrCsEGIMxtXFfTkvQkaElF9c="},
   [
-    {"Name": "Viggo"},
-    {"Username": "123"},
-    {"Password": "TYmMPhJgFGirLE1/QOAHsw=="},
-    {"Salt": "Li2mTgAmaXEVe0c7UYjntACVt/eRlkVEMCUJSeKTHJ4="}
-  ],
-  [
-    {"Name": "Kathrine"},
-    {"Username": "321"},
-    {"Password": "x0pSWst0esI02vweLOS28Q=="},
-    {"Salt": "kSQE+1bJqnkVo8uKcvJSuJaam9uAN76HTQj2F2bEQrk="}
+    {"Name": "Youtube"},
+    {"Username": "Frederik"},
+    {"Password": "VRdOXCBF8xZoC0OIxmYQcQ=="},
+    {"Salt": "1lbhU/bPjX7J7a71udTM6yJnFCY3SS3z39A4PLKqKeE="}
   ],
   [
     {"Name": "Lectio"},
     {"Username": "Kabo3"},
-    {"Password": "RoUwUEdZaJcyR0FNZJjLvQ=="},
-    {"Salt": "mo0lJk0UDyfi4Lu4mw03xDM2YcEW9z2wFqEkgks3EVw="}
-  ],
-  [
-    {"Name": "Youtube"},
-    {"Username": "Random"},
-    {"Password": "s7RegryD80RkxxpnQCYttg=="},
-    {"Salt": "hjfIXqDi5qSjqPJQZdsO8y7f2F8wd/9DALOl37CaH6Q="}
+    {"Password": "VdQ2t6gaixZ+skW85/4nPQ=="},
+    {"Salt": "kc7q0q1E9V8AsQpF6K0rOLkFWnoY+o+3OxlJT8kB/xg="}
   ]
 ]
