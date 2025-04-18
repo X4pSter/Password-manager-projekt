@@ -2,14 +2,20 @@ import java.io.File;
 
 TekstFelt webnavn,brugernavn,webKode,url,note;
 TekstFeltObf kode;
-Knap LogInd, reset,tilføj,anuller,godkend,LogAf,tilbageKnap;
+Knap LogInd, reset,tilføj,anuller,godkend,LogAf,tilbageKnap, editFelt;
 Knap WipeYes, WipeNo;
 
 Kodedata[] kodedata = new Kodedata[100];
 
 TekstFelt newPassword;
 Knap setNewPassword;
+
 String AddKodeTekst = "Tilføj data";
+
+
+
+
+String SeKodeTekst = "Se data";
 
 //Sider
 Forside forside;
@@ -40,10 +46,13 @@ String key;
 int attempts;
 int kodedataSize = 0;
 int KodeNummer = 2;
+boolean EditKode = false;
 
 
 
 void setup(){
+    
+    
     size(800,800);
 
     TrykReset = false;
@@ -57,6 +66,7 @@ void setup(){
     tilbageKnap = new Knap(this, 80, 30,100,50,"Tilbage","Tilbage",hr,hg,hb,cr,cg,cb);
     anuller = new Knap(this, width/2-200, height-125,200,50,"Anuller","Tilbage",hr,hg,hb,cr,cg,cb);
     godkend = new Knap(this, width/2+200, height-125,200,50,"Godkend","Data",hr,hg,hb,cr,cg,cb);
+    editFelt = new Knap(this, width/2+200, height-125,200,50,"Redigere","Edit",hr,hg,hb,cr,cg,cb);
 
 
     webnavn = new TekstFelt(this,width/2-155,300,300,50,"Websted navn");
@@ -73,13 +83,11 @@ void setup(){
 
 
     addkodeside = new AddKodeSide(this,tilbageKnap,anuller,godkend,webnavn,brugernavn,webKode,url,note,AddKodeTekst);
-    sekodeside = new AddKodeSide(this,tilbageKnap,anuller,tilbageKnap,webnavn,brugernavn,webKode,url,note,AddKodeTekst);
+    sekodeside = new AddKodeSide(this,tilbageKnap,anuller,editFelt,webnavn,brugernavn,webKode,url,note,SeKodeTekst);
 
     dbPath = new File(sketchPath("db.json"));
 
  
-
-
     if(dbPath.exists()){
         db = loadJSONArray("db.json");
 
@@ -179,7 +187,10 @@ void mousePressed(){
             
         }
         }
-    if(Side==2){addkodeside.runMouse();}
+    if(Side==2){
+        addkodeside.runMouse();
+        addkodeside.runMouseFelt();
+        }
     if(Side == 3){sekodeside.runMouse();}
     
 }
@@ -287,6 +298,9 @@ void changeObfuscationFunc(){
 }
 
 void Data(){
+    
+
+    println("side nummer" + Side);
     JSONArray newService = new JSONArray();
 
     JSONObject name = new JSONObject();
@@ -307,6 +321,7 @@ void Data(){
     salt.setString("Salt",aes.encrypt(newSalt,key,key));
     newService.setJSONObject(3,salt);
 
+    if(EditKode == false){
     int repetitions = 0;
 
     boolean empty = db.isNull(repetitions);
@@ -332,6 +347,15 @@ void Data(){
     }
     Side = 1;
     addkodeside.resetTekst();
+    }
+    else if(EditKode == true){
+        db.setJSONArray(KodeNummer,newService);
+        Side = 1;
+        addkodeside.resetTekst();
+        saveJSONArray(db,"db.json");
+        EditKode = false;
+    }
+
     
 }
 
@@ -347,12 +371,17 @@ void SeData(){
 
         JSONObject dbP = dbj.getJSONObject(2);
         webKode.setTekst(dbP.getString("Password"));
+
+        
     
         
     
 }
 
-
+void Edit(){
+    EditKode = true;
+    Side = 2;
+}
 
 
 

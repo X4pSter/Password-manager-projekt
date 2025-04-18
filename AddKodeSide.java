@@ -53,12 +53,15 @@ public class AddKodeSide{
         tilbage.mouseClickDetection();
         anuller.mouseClickDetection();
         godkend.mouseClickDetection();
+    
+        
+    }
+    public void runMouseFelt(){
         webnavn.mouseClickDetection();
         brugernavn.mouseClickDetection();
         kodeord.mouseClickDetection();
         url.mouseClickDetection();
         note.mouseClickDetection();
-        
     }
 
     public void runKeys(){
