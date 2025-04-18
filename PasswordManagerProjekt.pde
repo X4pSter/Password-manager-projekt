@@ -1,6 +1,6 @@
 import java.io.File;
 
-TekstFelt webnavn,brugernavn,webKode,url,note;
+TekstFelt webnavn,brugernavn,webKode;
 TekstFeltObf kode;
 Knap LogInd, reset,tilføj,anuller,godkend,LogAf,tilbageKnap, editFelt;
 Knap WipeYes, WipeNo;
@@ -69,11 +69,9 @@ void setup(){
     editFelt = new Knap(this, width/2+200, height-125,200,50,"Redigere","Edit",hr,hg,hb,cr,cg,cb);
 
 
-    webnavn = new TekstFelt(this,width/2-155,300,300,50,"Websted navn");
-    brugernavn = new TekstFelt(this,width/2-155,400,300,50,"Brugernavn");
-    webKode = new TekstFelt(this,width/2-155,500,300,50,"Kodeord");
-    url = new TekstFelt(this,width/2+155,400,300,50,"URL");
-    note = new TekstFelt(this,width/2+155,500,300,50,"Note");
+    webnavn = new TekstFelt(this,width/2,300,600,50,"Websted navn");
+    brugernavn = new TekstFelt(this,width/2,400,600,50,"Brugernavn");
+    webKode = new TekstFelt(this,width/2,500,600,50,"Kodeord");
 
     changeObfuscation = new Knap(this,width/2+200,355,70,40,"Vis kode","changeObfuscationFunc",100,100,100,0,0,0);
     tilføj = new Knap(this, width/2, 350,300,50,"Tilføj Password","NyData",hr,hg,hb,cr,cg,cb);
@@ -82,8 +80,8 @@ void setup(){
     homescreen = new Homescreen(this,tilføj, LogAf);
 
 
-    addkodeside = new AddKodeSide(this,tilbageKnap,anuller,godkend,webnavn,brugernavn,webKode,url,note,AddKodeTekst);
-    sekodeside = new AddKodeSide(this,tilbageKnap,anuller,editFelt,webnavn,brugernavn,webKode,url,note,SeKodeTekst);
+    addkodeside = new AddKodeSide(this,tilbageKnap,anuller,godkend,webnavn,brugernavn,webKode,AddKodeTekst);
+    sekodeside = new AddKodeSide(this,tilbageKnap,anuller,editFelt,webnavn,brugernavn,webKode,SeKodeTekst);
 
     dbPath = new File(sketchPath("db.json"));
 
