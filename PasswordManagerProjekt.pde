@@ -169,7 +169,6 @@ void keyPressed(){
 void mousePressed(){
     if(Side==0){forside.runMouse();}
     if(Side==1){
-        count = 0;
 
         homescreen.runMouse();
 
@@ -179,12 +178,11 @@ void mousePressed(){
             JSONObject dbii = dbi.getJSONObject(0);
             kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbii.getString("Name"), "SeData"); 
             
-            if (kodedata[i].mouseClickDetection() /*&& count >= 1*/) {
+            if (kodedata[i].mouseClickDetection() && count >= 1) {
                 KodeNummer =i;
                 SeData(); 
             }
         }
-        
         count++;
 
         }
@@ -217,6 +215,8 @@ void getPassword(){
     passwordMatch = temp.equals(encryptyPassword);
 
     if(passwordMatch){
+        count = 0;
+
         Side = 1;
 
         key = hashyPassword;
