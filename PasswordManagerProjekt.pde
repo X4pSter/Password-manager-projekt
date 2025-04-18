@@ -45,6 +45,7 @@ int kodedataSize = 0;
 int KodeNummer = 2;
 boolean EditKode = false;
 
+
 int count;
 
 
@@ -145,7 +146,7 @@ void draw(){
         textSize(25);
 
     }
-    else if(Side == 3 && passwordMatch ==true){
+    else if(Side == 3 && passwordMatch == true){
         sekodeside.runDisplay();
         textSize(25);
     }
@@ -167,7 +168,14 @@ void keyPressed(){
 }
 
 void mousePressed(){
-    if(Side==0){forside.runMouse();}
+    if(Side==0){
+        forside.runMouse();
+
+        if(TrykReset == true){
+            forside.WipeDataMouse();
+        }
+    }
+    
     if(Side==1){
 
         homescreen.runMouse();
@@ -275,6 +283,7 @@ void Tilbage(){
 
 void NyData(){
     Side = 2;
+
 }
 
 void loadCorrectButtons(boolean b){

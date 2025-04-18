@@ -1,22 +1,10 @@
 [
-  {"Password": "BpcI4rU77fVJ+rWkzYeBaFR5UXpzpxPivRtu1yxtr1zUYMqXA8+JRRvq3rVZJkbaFZGbIQe58ApWHvPp8aGi0w9nFRGj/ug8FCKAl0MVkzBiFCUglHhIYEk5gwioA1HvzEPYwMVHv0Z0cbH32RKQylR5d3xz9opzCPqRB4sypU0gqP+yiVx0Itac498+vWPB"},
-  {"Salt": "3q0NXL9FVIhKJH2j6lNDf2ZJZOAvY3ZqWhlVDGC3hkc="},
+  {"Password": "2oepe4yqZdVJrXikQF3L++E0ytuQ2/hgqntAmZAhS1ntyvpaKFZTbIt8eI2FbYpY1vcMudX4su+NMmxk/fYSpHl0+a+Y1aseZG09XNADk0CLyhFnxE7dUDj0Ry3p67kGEh+uBWhvcTulpZIcp6H28u5uBZlGPWhpD371h2PmOSF57CgEdFrumQdOnsUQLn+t"},
+  {"Salt": "KKs9jDy4zmtEPmISnXIiB5wBhzaUc6Mu86xSQHK3zIs="},
   [
-    {"Name": "l"},
-    {"Username": "l"},
-    {"Password": "5Co4f7ieks1ANQF2KxycLw=="},
-    {"Salt": "Y3rqKyt+PbpAWSjm3t7QgIoQZdDhxgs8uSmViq+htDY="}
-  ],
-  [
-    {"Name": "ll"},
-    {"Username": "ll"},
-    {"Password": "aMoS6CZq53M4g/KmA+cOvg=="},
-    {"Salt": "p4s0XFhlC1GxRkfox/dwnA=="}
-  ],
-  [
-    {"Name": "Youtube"},
-    {"Username": "X4pSter"},
-    {"Password": "uWI2VHEYjXzUy6JR0LqvWcCOIWQe1Lm+cfKtGsf/NnU="},
-    {"Salt": "ibV7cpUsWe6V5+xkBDS8Qel4biNKzPAls4g+SG9IQjw="}
+    {"Name": "YouTube\t"},
+    {"Username": "Sus Impasta"},
+    {"Password": "GB1zyBoU4Tg83GfRDHLNPdIrBtOvkTmcruIK0Mn/4FQ="},
+    {"Salt": "V/0ERq+XRWrVQz2cp34CCkTrUnQd4buxTKmBh2fsb8E="}
   ]
 ]
