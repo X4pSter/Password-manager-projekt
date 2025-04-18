@@ -12,9 +12,6 @@ Knap setNewPassword;
 
 String AddKodeTekst = "Tilføj data";
 
-
-
-
 String SeKodeTekst = "Se data";
 
 //Sider
@@ -47,6 +44,8 @@ int attempts;
 int kodedataSize = 0;
 int KodeNummer = 2;
 boolean EditKode = false;
+
+int count;
 
 
 
@@ -92,6 +91,7 @@ void setup(){
         db = loadJSONArray("db.json");
 
         JSONObject tempObject = db.getJSONObject(1);
+        
         String temp = tempObject.getString("Salt");
 
         if(temp == null){
@@ -138,9 +138,7 @@ void draw(){
             kodedata[i].runDisplay();
             }
             
-        }
-        
-                
+        }        
 
     } else  if(Side == 2 && passwordMatch==true){
         addkodeside.runDisplay();
@@ -171,6 +169,8 @@ void keyPressed(){
 void mousePressed(){
     if(Side==0){forside.runMouse();}
     if(Side==1){
+        count = 0;
+
         homescreen.runMouse();
 
         for(int i = 2; i < db.size(); i++){
@@ -179,12 +179,14 @@ void mousePressed(){
             JSONObject dbii = dbi.getJSONObject(0);
             kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbii.getString("Name"), "SeData"); 
             
-            if (kodedata[i].mouseClickDetection()) {
+            if (kodedata[i].mouseClickDetection() /*&& count >= 1*/) {
                 KodeNummer =i;
                 SeData(); 
             }
         }
-            
+        
+        count++;
+
         }
         }
     if(Side==2){
@@ -218,8 +220,6 @@ void getPassword(){
         Side = 1;
 
         key = hashyPassword;
-
-        
     }
 
     attempts++;
@@ -363,19 +363,18 @@ void SeData(){
 
     Side = 3;
     JSONArray dbj = db.getJSONArray(KodeNummer);
-        JSONObject dbN = dbj.getJSONObject(0);
-        webnavn.setTekst(dbN.getString("Name"));
 
-        JSONObject dbB = dbj.getJSONObject(1);
-        brugernavn.setTekst(dbB.getString("Username"));
+    JSONObject dbN = dbj.getJSONObject(0);
+    webnavn.setTekst(dbN.getString("Name"));
 
-        JSONObject dbP = dbj.getJSONObject(2);
-        webKode.setTekst(dbP.getString("Password"));
+    JSONObject dbB = dbj.getJSONObject(1);
+    brugernavn.setTekst(dbB.getString("Username"));
 
-        
-    
-        
-    
+    JSONObject dbP = dbj.getJSONObject(2);
+    JSONObject salt = dbj.getJSONObject(3);
+    String passwordSalt = aes.decrypt(salt.getString("Salt"),key,key);
+    String temp = aes.decrypt(dbP.getString("Password"),key,passwordSalt);
+    webKode.setTekst(temp);
 }
 
 void Edit(){
