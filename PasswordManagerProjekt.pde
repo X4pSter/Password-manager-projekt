@@ -128,7 +128,7 @@ void mouseWheel(MouseEvent event) {
         scrolle = event.getCount() + scrolle;
         println(scrolle);
 
-        if(scrolle >= 0){
+        if(scrolle <= 0){
             scrolle = 0;
         }
     }
@@ -151,7 +151,7 @@ void draw(){
             if (i < kodedata.length) {  // Ensure we do not exceed array size
             JSONArray dbi = db.getJSONArray(i);
             JSONObject dbii = dbi.getJSONObject(0);
-            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300 + scrolle*2, dbii.getString("Name"), "SeData"); 
+            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300 - scrolle*2, dbii.getString("Name"), "SeData"); 
             kodedata[i].runDisplay();
             }
             
