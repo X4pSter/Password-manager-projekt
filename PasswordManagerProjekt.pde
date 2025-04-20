@@ -135,8 +135,11 @@ void draw(){
 
     if(Side == 1 && passwordMatch==true){
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         homescreen.runDisplay();
 =======
+=======
+>>>>>>> Stashed changes
 
 
         
@@ -160,6 +163,9 @@ void draw(){
 
         
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     } else  if(Side == 2 && passwordMatch==true){
         addkodeside.runDisplay();
@@ -183,10 +189,13 @@ void keyPressed(){
 
 void mousePressed(){
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     if(Side==0){forside.runMouse();}
     if(Side==1){homescreen.runMouse();}
     if(Side==2){addkodeside.runMouse();}
 =======
+=======
+>>>>>>> Stashed changes
 
     
     if(Side==0){
