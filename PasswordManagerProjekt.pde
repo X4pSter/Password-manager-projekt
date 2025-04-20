@@ -36,6 +36,19 @@ boolean dbExisted;
 Knap changeObfuscation;
 String key;
 int attempts;
+<<<<<<< Updated upstream
+=======
+int kodedataSize = 0;
+int KodeNummer = 2;
+boolean EditKode = false;
+
+
+int scrolle;
+
+int count;
+
+
+>>>>>>> Stashed changes
 
 void setup(){
     size(800,800);
@@ -48,6 +61,8 @@ void setup(){
 
     tilføj = new Knap(this, width/2, 350,300,50,"Tilføj Password","NyData",hr,hg,hb,cr,cg,cb);
     LogAf = new Knap(this, 80, 30,100,50,"Log Af","Tilbage",hr,hg,hb,cr,cg,cb);
+    
+
     tilbageKnap = new Knap(this, 80, 30,100,50,"Tilbage","Tilbage",hr,hg,hb,cr,cg,cb);
     anuller = new Knap(this, width/2-200, height-125,200,50,"Anuller","Tilbage",hr,hg,hb,cr,cg,cb);
     godkend = new Knap(this, width/2+200, height-125,200,50,"Godkend","Data",hr,hg,hb,cr,cg,cb);
@@ -98,6 +113,18 @@ void setup(){
     
 }
 
+void mouseWheel(MouseEvent event) {
+    if(Side == 1){
+        scrolle = event.getCount() + scrolle;
+        println(scrolle);
+
+        if(scrolle >= 0){
+            scrolle = 0;
+        }
+    }
+  
+}
+
 void draw(){
     background(#24292e);
 
@@ -107,7 +134,33 @@ void draw(){
     }
 
     if(Side == 1 && passwordMatch==true){
+<<<<<<< Updated upstream
         homescreen.runDisplay();
+=======
+
+
+        
+
+        for(int i = 2; i < db.size(); i++){
+
+            if (i < kodedata.length) {  // Ensure we do not exceed array size
+            JSONArray dbi = db.getJSONArray(i);
+            JSONObject dbii = dbi.getJSONObject(0);
+            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300 + scrolle*2, dbii.getString("Name"), "SeData"); 
+            kodedata[i].runDisplay();
+            }
+            
+        }        
+
+        noStroke();
+        fill(36,41,46);
+        rect(0, 0, 800, 410);
+
+        homescreen.runDisplay();
+
+        
+
+>>>>>>> Stashed changes
     } else  if(Side == 2 && passwordMatch==true){
         addkodeside.runDisplay();
         textSize(25);
@@ -129,9 +182,47 @@ void keyPressed(){
 }
 
 void mousePressed(){
+<<<<<<< Updated upstream
     if(Side==0){forside.runMouse();}
     if(Side==1){homescreen.runMouse();}
     if(Side==2){addkodeside.runMouse();}
+=======
+
+    
+    if(Side==0){
+        forside.runMouse();
+
+        if(TrykReset == true){
+            forside.WipeDataMouse();
+        }
+    }
+    
+    if(Side==1){
+
+        homescreen.runMouse();
+
+        for(int i = 2; i < db.size(); i++){
+            if (i < kodedata.length) {  // Ensure we do not exceed array size
+            JSONArray dbi = db.getJSONArray(i);
+            JSONObject dbii = dbi.getJSONObject(0);
+            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300+ scrolle*2, dbii.getString("Name"), "SeData"); 
+            
+            if (kodedata[i].mouseClickDetection() && count >= 1) {
+                KodeNummer =i;
+                SeData(); 
+            }
+        }
+        count++;
+
+        }
+        }
+    if(Side==2){
+        addkodeside.runMouse();
+        addkodeside.runMouseFelt();
+        }
+    if(Side == 3){sekodeside.runMouse();}
+    
+>>>>>>> Stashed changes
 }
 
 void getPassword(){
