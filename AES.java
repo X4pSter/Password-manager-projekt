@@ -10,7 +10,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec; 
 import javax.crypto.spec.SecretKeySpec; 
   
-class AES{ 
+public class AES{ 
     
     // This method use to encrypt to string 
     public String encrypt(String strToEncrypt, String sk, String s) { 

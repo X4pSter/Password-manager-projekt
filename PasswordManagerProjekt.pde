@@ -45,8 +45,9 @@ int kodedataSize = 0;
 int KodeNummer = 2;
 boolean EditKode = false;
 
-
 int count;
+
+CopyToClipboard testClipboard;
 
 
 
@@ -84,6 +85,10 @@ void setup(){
     sekodeside = new AddKodeSide(this,tilbageKnap,anuller,editFelt,webnavn,brugernavn,webKode,SeKodeTekst);
 
     dbPath = new File(sketchPath("db.json"));
+
+    testClipboard = new CopyToClipboard();
+
+    testClipboard.copy("DET VIRKER FANDME");
 
  
     if(dbPath.exists()){
