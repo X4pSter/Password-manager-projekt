@@ -15,11 +15,11 @@ public class AddKodeSide{
         tilbage = tb;
         anuller = an;
         godkend = gk;
-        kopier = k;
         webnavn = wn;
         brugernavn = bn;
         kodeord = ko;
         tekst = tk;
+        kopier = k;
     }
 
     public void runDisplay(){
