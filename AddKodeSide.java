@@ -4,17 +4,18 @@ public class AddKodeSide{
 
     private PApplet p;
 
-    private Knap tilbage,anuller,godkend;
+    private Knap tilbage,anuller,godkend,kopier;
 
     private TekstFelt webnavn,brugernavn,kodeord;
 
     public String tekst;
     
-    public AddKodeSide(PApplet p, Knap tb, Knap an, Knap gk, TekstFelt wn,TekstFelt bn,TekstFelt ko, String tk){
+    public AddKodeSide(PApplet p, Knap tb, Knap an, Knap gk, TekstFelt wn,TekstFelt bn,TekstFelt ko, String tk, Knap k){
         this.p = p;
         tilbage = tb;
         anuller = an;
         godkend = gk;
+        kopier = k;
         webnavn = wn;
         brugernavn = bn;
         kodeord = ko;
@@ -39,7 +40,7 @@ public class AddKodeSide{
         webnavn.runDisplay();
         brugernavn.runDisplay();
         kodeord.runDisplay();
-
+        kopier.runDisplay();
 
         anuller.runDisplay();
         godkend.runDisplay();
@@ -50,6 +51,7 @@ public class AddKodeSide{
         tilbage.mouseClickDetection();
         anuller.mouseClickDetection();
         godkend.mouseClickDetection();
+        kopier.mouseClickDetection();
     
         
     }

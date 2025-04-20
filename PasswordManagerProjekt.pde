@@ -2,7 +2,7 @@ import java.io.File;
 
 TekstFelt webnavn,brugernavn,webKode;
 TekstFeltObf kode;
-Knap LogInd, reset,tilføj,anuller,godkend,LogAf,tilbageKnap, editFelt;
+Knap LogInd, reset,tilføj,anuller,godkend,LogAf,tilbageKnap,editFelt,kopier;
 Knap WipeYes, WipeNo;
 
 Kodedata[] kodedata = new Kodedata[100];
@@ -47,7 +47,7 @@ boolean EditKode = false;
 
 int count;
 
-CopyToClipboard testClipboard;
+CopyToClipboard copyToClipboard;
 
 
 
@@ -67,6 +67,7 @@ void setup(){
     tilbageKnap = new Knap(this, 80, 30,100,50,"Tilbage","Tilbage",hr,hg,hb,cr,cg,cb);
     anuller = new Knap(this, width/2-200, height-125,200,50,"Anuller","Tilbage",hr,hg,hb,cr,cg,cb);
     godkend = new Knap(this, width/2+200, height-125,200,50,"Godkend","Data",hr,hg,hb,cr,cg,cb);
+    kopier = new Knap(this, width/2-230, height-230,140,30,"Kopier Kodeord","kopierKode",hr,hg,hb,cr,cg,cb);
     editFelt = new Knap(this, width/2+200, height-125,200,50,"Redigere","Edit",hr,hg,hb,cr,cg,cb);
 
 
@@ -81,14 +82,12 @@ void setup(){
     homescreen = new Homescreen(this,tilføj, LogAf);
 
 
-    addkodeside = new AddKodeSide(this,tilbageKnap,anuller,godkend,webnavn,brugernavn,webKode,AddKodeTekst);
-    sekodeside = new AddKodeSide(this,tilbageKnap,anuller,editFelt,webnavn,brugernavn,webKode,SeKodeTekst);
+    addkodeside = new AddKodeSide(this,tilbageKnap,anuller,godkend,webnavn,brugernavn,webKode,AddKodeTekst,kopier);
+    sekodeside = new AddKodeSide(this,tilbageKnap,anuller,editFelt,webnavn,brugernavn,webKode,SeKodeTekst,kopier);
 
     dbPath = new File(sketchPath("db.json"));
 
-    testClipboard = new CopyToClipboard();
-
-    testClipboard.copy("DET VIRKER FANDME");
+    copyToClipboard = new CopyToClipboard();
 
  
     if(dbPath.exists()){
@@ -394,5 +393,8 @@ void Edit(){
     Side = 2;
 }
 
+void kopierKode(){
+    copyToClipboard.copy(webKode.getTekst());
+}
 
 
