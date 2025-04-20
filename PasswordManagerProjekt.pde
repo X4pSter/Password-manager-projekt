@@ -47,6 +47,8 @@ boolean EditKode = false;
 
 int count;
 
+int scrolle;
+
 CopyToClipboard copyToClipboard;
 
 
@@ -124,6 +126,18 @@ void setup(){
     
 }
 
+void mouseWheel(MouseEvent event) {
+    if(Side == 1){
+        scrolle = event.getCount() + scrolle;
+        println(scrolle);
+
+        if(scrolle >= 0){
+            scrolle = 0;
+        }
+    }
+  
+}
+
 void draw(){
     background(#24292e);
 
@@ -134,17 +148,23 @@ void draw(){
 
     if(Side == 1 && passwordMatch==true){
           
-        homescreen.runDisplay();
+        
 
         for(int i = 2; i < db.size(); i++){
             if (i < kodedata.length) {  // Ensure we do not exceed array size
             JSONArray dbi = db.getJSONArray(i);
             JSONObject dbii = dbi.getJSONObject(0);
-            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbii.getString("Name"), "SeData"); 
+            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300 + scrolle*2, dbii.getString("Name"), "SeData"); 
             kodedata[i].runDisplay();
             }
             
-        }        
+        }       
+
+        noStroke();
+        fill(36,41,46);
+        rect(0, 0, 800, 410);
+
+        homescreen.runDisplay(); 
 
     } else  if(Side == 2 && passwordMatch==true){
         addkodeside.runDisplay();
@@ -189,7 +209,7 @@ void mousePressed(){
             if (i < kodedata.length) {  // Ensure we do not exceed array size
             JSONArray dbi = db.getJSONArray(i);
             JSONObject dbii = dbi.getJSONObject(0);
-            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300, dbii.getString("Name"), "SeData"); 
+            kodedata[i] = new Kodedata(this, width / 2, i*60 + 300+ scrolle*2, dbii.getString("Name"), "SeData"); 
             
             if (kodedata[i].mouseClickDetection() && count >= 1) {
                 KodeNummer =i;
