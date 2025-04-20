@@ -36,8 +36,8 @@ boolean dbExisted;
 Knap changeObfuscation;
 String key;
 int attempts;
-<<<<<<< Updated upstream
-=======
+
+Kodedata kodedata[];
 int kodedataSize = 0;
 int KodeNummer = 2;
 boolean EditKode = false;
@@ -48,7 +48,6 @@ int scrolle;
 int count;
 
 
->>>>>>> Stashed changes
 
 void setup(){
     size(800,800);
@@ -134,9 +133,6 @@ void draw(){
     }
 
     if(Side == 1 && passwordMatch==true){
-<<<<<<< Updated upstream
-        homescreen.runDisplay();
-=======
 
 
         
@@ -160,7 +156,6 @@ void draw(){
 
         
 
->>>>>>> Stashed changes
     } else  if(Side == 2 && passwordMatch==true){
         addkodeside.runDisplay();
         textSize(25);
@@ -182,11 +177,6 @@ void keyPressed(){
 }
 
 void mousePressed(){
-<<<<<<< Updated upstream
-    if(Side==0){forside.runMouse();}
-    if(Side==1){homescreen.runMouse();}
-    if(Side==2){addkodeside.runMouse();}
-=======
 
     
     if(Side==0){
@@ -222,7 +212,6 @@ void mousePressed(){
         }
     if(Side == 3){sekodeside.runMouse();}
     
->>>>>>> Stashed changes
 }
 
 void getPassword(){
