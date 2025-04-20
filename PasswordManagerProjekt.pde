@@ -2,7 +2,7 @@ import java.io.File;
 
 TekstFelt webnavn,brugernavn,webKode;
 TekstFeltObf kode;
-Knap LogInd, reset,tilføj,anuller,godkend,LogAf,tilbageKnap,editFelt,kopier;
+Knap LogInd, reset,tilføj,anuller,godkend,LogAf,tilbageKnap,editFelt,kopier,sletData;
 Knap WipeYes, WipeNo;
 
 Kodedata[] kodedata = new Kodedata[100];
@@ -68,6 +68,7 @@ void setup(){
     LogAf = new Knap(this, 80, 30,100,50,"Log Af","Tilbage",hr,hg,hb,cr,cg,cb);
     tilbageKnap = new Knap(this, 80, 30,100,50,"Tilbage","Tilbage",hr,hg,hb,cr,cg,cb);
     anuller = new Knap(this, width/2-200, height-125,200,50,"Anuller","Tilbage",hr,hg,hb,cr,cg,cb);
+    sletData = new Knap(this, width/2-200, height-125,200,50,"Slet Kodeord","sletData",hr,hg,hb,cr,cg,cb);
     godkend = new Knap(this, width/2+200, height-125,200,50,"Godkend","Data",hr,hg,hb,cr,cg,cb);
     kopier = new Knap(this, width/2-230, height-230,140,30,"Kopier Kodeord","kopierKode",hr,hg,hb,cr,cg,cb);
     editFelt = new Knap(this, width/2+200, height-125,200,50,"Redigere","Edit",hr,hg,hb,cr,cg,cb);
@@ -85,7 +86,7 @@ void setup(){
 
 
     addkodeside = new AddKodeSide(this,tilbageKnap,anuller,godkend,webnavn,brugernavn,webKode,AddKodeTekst,kopier);
-    sekodeside = new AddKodeSide(this,tilbageKnap,anuller,editFelt,webnavn,brugernavn,webKode,SeKodeTekst,kopier);
+    sekodeside = new AddKodeSide(this,tilbageKnap,sletData,editFelt,webnavn,brugernavn,webKode,SeKodeTekst,kopier);
 
     dbPath = new File(sketchPath("db.json"));
 
@@ -120,6 +121,8 @@ void setup(){
 
     loadCorrectButtons(dbExisted);
     //db.setJSONObject(0,pw);
+
+    sletData();
     
 }
 
@@ -302,6 +305,17 @@ void Tilbage(){
     addkodeside.resetTekst();
 }
 
+void sletData(){
+    for(int i = KodeNummer; i < db.size(); i++){
+        if(i + 1 == db.size()){
+            db.remove(i);
+            break;
+        }
+        db.setJSONArray(i,db.getJSONArray(i+1));
+    }
+    saveJSONArray(db,"db.json");
+    Tilbage();
+}
 
 void NyData(){
     Side = 2;
