@@ -37,7 +37,7 @@ Knap changeObfuscation;
 String key;
 int attempts;
 
-Kodedata kodedata[];
+Kodedata[] kodedata = new Kodedata[100];
 int kodedataSize = 0;
 int KodeNummer = 2;
 boolean EditKode = false;
