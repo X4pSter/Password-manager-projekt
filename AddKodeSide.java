@@ -4,13 +4,13 @@ public class AddKodeSide{
 
     private PApplet p;
 
-    private Knap tilbage,anuller,godkend;
+    private Knap tilbage,anuller,godkend,kopier;
 
-    private TekstFelt webnavn,brugernavn,kodeord,url,note;
+    private TekstFelt webnavn,brugernavn,kodeord;
 
     public String tekst;
     
-    public AddKodeSide(PApplet p, Knap tb, Knap an, Knap gk, TekstFelt wn,TekstFelt bn,TekstFelt ko,TekstFelt URL,TekstFelt nt, String tk){
+    public AddKodeSide(PApplet p, Knap tb, Knap an, Knap gk, TekstFelt wn,TekstFelt bn,TekstFelt ko, String tk, Knap k){
         this.p = p;
         tilbage = tb;
         anuller = an;
@@ -18,9 +18,8 @@ public class AddKodeSide{
         webnavn = wn;
         brugernavn = bn;
         kodeord = ko;
-        url = URL;
-        note = nt;
         tekst = tk;
+        kopier = k;
     }
 
     public void runDisplay(){
@@ -41,8 +40,7 @@ public class AddKodeSide{
         webnavn.runDisplay();
         brugernavn.runDisplay();
         kodeord.runDisplay();
-        url.runDisplay();
-        note.runDisplay();
+        kopier.runDisplay();
 
         anuller.runDisplay();
         godkend.runDisplay();
@@ -53,28 +51,30 @@ public class AddKodeSide{
         tilbage.mouseClickDetection();
         anuller.mouseClickDetection();
         godkend.mouseClickDetection();
+        kopier.mouseClickDetection();
+    
+        
+    }
+    public void runMouseFelt(){
         webnavn.mouseClickDetection();
         brugernavn.mouseClickDetection();
         kodeord.mouseClickDetection();
-        url.mouseClickDetection();
-        note.mouseClickDetection();
-        
+     
     }
 
     public void runKeys(){
         webnavn.runKeys();
         brugernavn.runKeys();
         kodeord.runKeys();
-        url.runKeys();
-        note.runKeys();
+        
     }
 
     public void resetTekst(){
         webnavn.resetTekst();
         brugernavn.resetTekst();
         kodeord.resetTekst();
-        url.resetTekst();
-        note.resetTekst();
+
     }
+    
 
 }

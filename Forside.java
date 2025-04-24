@@ -39,12 +39,14 @@ public class Forside{
         LogIn.mouseClickDetection();
         reset.mouseClickDetection();
 
-        WipeYes.mouseClickDetection();
-        WipeNo.mouseClickDetection();
 
         changeObfuscation.mouseClickDetection();
 
         tekstFeltObf.mouseClickDetection();
+    }
+    public void WipeDataMouse(){
+        WipeYes.mouseClickDetection();
+        WipeNo.mouseClickDetection();
     }
 
     public void DataWipe(){
